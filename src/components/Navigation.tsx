@@ -6,13 +6,13 @@ const Navigation = () => (
     <h1>Joeun lee web portfolio</h1>
     <ul>
       <li>
-        <a href="#">About</a>
+        <a href="#about">About</a>
       </li>
       <li>
-        <a href="#">Works</a>
+        <a href="#works">Works</a>
       </li>
       <li>
-        <a href="#">Contact</a>
+        <a href="#contact">Contact</a>
       </li>
     </ul>
   </NavigationWrap>

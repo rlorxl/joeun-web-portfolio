@@ -8,7 +8,7 @@ const About = () => (
   <AboutWrap>
     <div>
       <Description>
-        <h2>About</h2>
+        <h2 id="about">About</h2>
         <Introduce>
           {/* <h3>저를 소개합니다</h3> */}
           <p>

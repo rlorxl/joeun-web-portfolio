@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 const Works = () => (
   <WorksWrap>
-    <h1>
+    <h1 id="works">
       <span>frontend</span>
       <span>works</span>
     </h1>
@@ -128,5 +128,6 @@ const DescBox = styled.div`
     font-size: ${({ theme }) => theme.fontSize.base};
     font-weight: 700;
     color: #222;
+    text-transform: uppercase;
   }
 `;

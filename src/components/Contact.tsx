@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 const Contact = () => (
   <ContactWrap>
-    <h2>Contact</h2>
+    <h2 id="contact">Contact</h2>
     <Email>gooodgirl08@gmail.com</Email>
     <div>
       <p>gooodgirl08@gmail.com</p>

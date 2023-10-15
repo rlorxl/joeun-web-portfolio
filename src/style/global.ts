@@ -7,11 +7,21 @@ const GlobalStyle = createGlobalStyle`
 
 }
 
-  *,
+*,
 *::after,
 *::before {
   margin: 0;
   padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar, 
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  background-color: #242424;
 }
 
 div,
@@ -34,7 +44,7 @@ body {
   -webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select:none;
-  user-select:none
+  user-select:none;
 }
 
 ul,li {
