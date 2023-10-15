@@ -1,8 +1,8 @@
 import React from "react";
 import { styled } from "styled-components";
-import Skills from "./Skills.tsx";
-import SVG from "../assets/roundpath.svg";
 import Experience from "./Experience.tsx";
+import SVG from "../assets/roundpath.svg";
+import data from "../data/index.ts";
 
 const About = () => (
   <AboutWrap>
@@ -23,7 +23,11 @@ const About = () => (
           </p>
         </Introduce>
       </Description>
-      <Skills />
+      <Skills>
+        {data.skills.map((item, i) => (
+          <span key={`skill${i}`}>{item}</span>
+        ))}
+      </Skills>
       <Experience />
       <RoundPath>
         <img src={SVG} alt="" />
@@ -59,6 +63,24 @@ const Introduce = styled.div`
     font-size: ${({ theme }) => theme.fontSize.medium2};
     font-weight: 400;
     line-height: 38px; /* 211.111% */
+  }
+`;
+
+const Skills = styled.div`
+  display: inline-flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  white-space: nowrap;
+  margin-bottom: 20rem;
+
+  span {
+    padding: 10px 24px;
+    border-radius: 80px;
+    border: 2px solid ${({ theme }) => theme.color.borderColor};
+    font-size: ${({ theme }) => theme.fontSize.large};
+    color: ${({ theme }) => theme.color.white};
   }
 `;
 

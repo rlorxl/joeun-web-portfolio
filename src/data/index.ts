@@ -14,7 +14,7 @@ const skills: string[] = [
   "Prisma",
   "Figma",
   "Photoshop",
-  "illusrator",
+  "illustrator",
 ];
 
 const experiences: { duration: string; title: string; descriptions: string[]; detail?: string[] }[] = [
@@ -35,7 +35,7 @@ const experiences: { duration: string; title: string; descriptions: string[]; de
   {
     duration: "2019.07 - 2020.08",
     title: "피터오세아 그래픽, 웹디자이너",
-    descriptions: ["디자인 에이전시", "브랜딩, 편집, 웹디자인 업무를 담당"],
+    descriptions: ["디자인 에이전시", "브랜딩, 편집, 웹디자인 업무"],
   },
   {
     duration: "2018.08 - 2019.01",
@@ -45,7 +45,7 @@ const experiences: { duration: string; title: string; descriptions: string[]; de
   {
     duration: "2017.08 - 2018.05",
     title: "vl cosmetics 디자이너",
-    descriptions: ["기업을 대상으로하는 화장품 orm전문 기업','패키지 디자인 담당, 회사 홍보 웹사이트 제작"],
+    descriptions: ["기업을 대상으로하는 화장품 orm전문 기업", "패키지 디자인, 회사 홍보 웹사이트 제작"],
   },
   {
     duration: "2014.03 - 2014.08",

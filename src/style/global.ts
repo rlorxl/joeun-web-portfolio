@@ -1,6 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+:root {
+  --global-width: 1280px;
+  --max-width: 1440px;
+
+}
+
   *,
 *::after,
 *::before {
@@ -22,9 +28,13 @@ body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
   overflow-x: hidden;
-  position: relative;
   color: #f8f8f8;
   background-color: #242424;
+
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 ul,li {
@@ -33,15 +43,24 @@ ul,li {
 
 a {
   text-decoration: none;
+  color: #f8f8f8;
+}
+
+h1, h2 {
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 h2 {
-  text-transform: uppercase;
   color: ${({ theme }) => theme.color.appColor};
   font-size: ${({ theme }) => theme.fontSize.medium1};
-  font-weight: 700;
 }
 `;
+
+const global = {
+  globalWidth: "1280px",
+  maxWidth: "1440px",
+};
 
 const color = {
   appColor: "#F04545",
@@ -71,6 +90,7 @@ const mixins = {
 };
 
 export const theme = {
+  global,
   color,
   fontSize,
   mixins,

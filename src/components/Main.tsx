@@ -21,23 +21,25 @@ const Main = () => (
 
 export default Main;
 
-const MainWrap = styled.div`
+const MainWrap = styled.section`
   height: calc(100vh - 100px);
-  padding: 0 5rem;
+  padding: 0 8rem;
   ${({ theme }) => theme.mixins.flexBox()};
 
   div {
-    width: 1280px;
-    max-width: 1440px;
-    ${({ theme }) => theme.mixins.flexBox({ direction: "column", align: "flex-start" })};
+    width: 1768px;
+    max-width: 1800px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12%, auto));
+    grid-template-rows: repeat(3, 1fr);
   }
 
   p {
     font-size: ${({ theme }) => theme.fontSize["4xl"]};
     font-weight: 600;
     overflow: hidden;
-    flex-shrink: 0;
     white-space: nowrap;
+    align-self: center;
   }
 
   span {
@@ -45,24 +47,24 @@ const MainWrap = styled.div`
   }
 
   p:nth-child(1) {
-    align-self: end;
+    grid-column: 3 / span 5;
   }
 
   p:nth-child(2) {
+    grid-area: 2/2/3/5;
     padding: 0 3rem;
     background-color: #f04545;
-    border-radius: 100px;
+    border-radius: 150px;
     color: #222;
-    margin-bottom: 2.5rem;
+    margin-bottom: 30px;
   }
 
   p:nth-child(3) {
-    max-width: 900px;
+    grid-area: 3/4/4/8;
     padding: 0 3rem;
     background-color: #c148ec;
-    border-radius: 100px;
+    border-radius: 150px;
     color: #222;
-    align-self: end;
   }
 `;
 

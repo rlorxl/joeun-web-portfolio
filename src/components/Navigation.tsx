@@ -25,10 +25,10 @@ const NavigationWrap = styled.div`
   width: 100%;
   height: 100px;
   padding: 2rem 3rem;
-  background-color: #242424;
   color: #fff;
   position: sticky;
   top: 0;
+  z-index: 100;
 
   h1 {
     font-size: ${({ theme }) => theme.fontSize.medium1};
