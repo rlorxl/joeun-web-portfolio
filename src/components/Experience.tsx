@@ -6,8 +6,8 @@ const Experience = () => (
   <ExperienceWrap>
     <h2>Experience</h2>
     <ul>
-      {data.experiences.map(({ duration, title, descriptions, detail }) => (
-        <li>
+      {data.experiences.map(({ duration, title, descriptions, detail }, i) => (
+        <li key={i}>
           <div>
             <Duration>{duration}</Duration>
             {detail && (

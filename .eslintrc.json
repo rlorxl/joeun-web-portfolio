@@ -8,6 +8,7 @@
     "commonjs": true,
     "es2022": true
   },
+
   "globals": { "_": true },
   "plugins": ["import", "html"],
   "extends": ["airbnb-base", "prettier", "react-app"],
@@ -40,7 +41,8 @@
         "allowTaggedTemplates": true
       }
     ],
-    "import/no-extraneous-dependencies": ["warn", { "devDependencies": true }],
+    "prefer-const": "off",
+    "import/no-extraneous-dependencies": ["warn", { "peerDependencies": true }],
     "max-len": [
       "error",
       {

@@ -4,7 +4,6 @@ const GlobalStyle = createGlobalStyle`
 :root {
   --global-width: 1280px;
   --max-width: 1440px;
-
 }
 
 *,
@@ -40,11 +39,13 @@ body {
   overflow-x: hidden;
   color: #f8f8f8;
   background-color: #242424;
+  position: relative;
 
   -webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select:none;
   user-select:none;
+  cursor: none;
 }
 
 ul,li {
@@ -73,7 +74,7 @@ const global = {
 };
 
 const color = {
-  appColor: "#F04545",
+  appColor: "#1dff8e",
   fontColor: "#222",
   white: "#f8f8f8",
   borderColor: "#A4A2A2",
