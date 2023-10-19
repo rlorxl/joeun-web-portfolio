@@ -3,10 +3,10 @@ import { useEffect } from "react";
 
 const useMouse = () => {
   useEffect(() => {
-    let mouseX = 100;
-    let mouseY = 100;
-    let smallMouseX = 100;
-    let smallMouseY = 100;
+    let mouseX = 0;
+    let mouseY = 0;
+    let smallMouseX = 0;
+    let smallMouseY = 0;
 
     gsap.to(
       {},

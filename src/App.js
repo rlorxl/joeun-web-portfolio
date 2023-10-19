@@ -12,27 +12,29 @@ import useMouse from "./hooks/useMouse.tsx";
 function App() {
   useMouse();
   useEffect(() => {
-    gsap.to(".overlay", {
-      duration: 0.5,
-      width: 0,
-      ease: "power3,Out",
-      stagger: { amount: 0.5 },
-    });
+    // gsap.to(".overlay", {
+    //   duration: 0.5,
+    //   width: 0,
+    //   ease: "power3,Out",
+    //   stagger: { amount: 0.5 },
+    // });
+    // setTimeout(() => scrollTo(0, 0), 100);
   }, []);
+
   return (
     <div className="App">
-      {Array(8)
+      {/* {Array(8)
         .fill("")
         .map((_, i) => (
           <Overlay key={i} className="overlay" />
-        ))}
+        ))} */}
       <Cursor />
       <Navigation />
       <main>
         <Main />
         <About />
         <Works />
-        <Contact />
+        {/* <Contact /> */}
       </main>
     </div>
   );
