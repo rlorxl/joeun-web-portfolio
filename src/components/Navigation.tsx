@@ -50,6 +50,7 @@ const NavigationWrap = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
+  background: linear-gradient(180deg, rgba(36, 36, 36, 1) 0%, rgba(36, 36, 36, 1) 30%, rgba(255, 255, 255, 0) 100%);
 
   h1 {
     font-size: ${({ theme }) => theme.fontSize.medium1};

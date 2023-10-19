@@ -42,7 +42,7 @@ const About = () => {
       scrollTrigger: {
         trigger: ".about",
         scrub: 100,
-        toggleActions: "play pause resume none",
+        toggleActions: "play none reverse none",
       },
       rotation: 360,
     });

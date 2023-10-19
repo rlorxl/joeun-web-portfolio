@@ -8,14 +8,15 @@ const Experience = () => {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.defaults({
     trigger: ".experience",
-    toggleActions: "restart none none none",
     start: "top 70%",
   });
   const experiences = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     gsap.to(".experience__heading", {
-      scrollTrigger: {},
+      scrollTrigger: {
+        toggleActions: "restart none none none",
+      },
       y: 0,
       opacity: 1,
       duration: 1.2,
@@ -28,6 +29,7 @@ const Experience = () => {
       gsap.to(target, {
         scrollTrigger: {
           trigger: target,
+          toggleActions: "play none none none",
         },
         y: 0,
         opacity: 1,

@@ -37,7 +37,7 @@ body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
   overflow-x: hidden;
-  color: #f8f8f8;
+  color: #f0f0f0;
   background-color: #242424;
   position: relative;
 
@@ -54,7 +54,7 @@ ul,li {
 
 a {
   text-decoration: none;
-  color: #f8f8f8;
+  color: #f0f0f0;
 }
 
 h1, h2 {
