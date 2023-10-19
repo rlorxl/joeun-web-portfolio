@@ -12,8 +12,8 @@ const Experience = () => (
             <Duration>{duration}</Duration>
             {detail && (
               <DetailWrap>
-                {detail.map(str => (
-                  <Detail>{str}</Detail>
+                {detail.map((str, i) => (
+                  <Detail key={i}>{str}</Detail>
                 ))}
               </DetailWrap>
             )}
@@ -21,8 +21,8 @@ const Experience = () => (
           <div>
             <Title>{title}</Title>
             <div>
-              {descriptions.map(desc => (
-                <p>{desc}</p>
+              {descriptions.map((desc, i) => (
+                <p key={i}>{desc}</p>
               ))}
             </div>
           </div>

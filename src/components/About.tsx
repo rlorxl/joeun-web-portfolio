@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import Experience from "./Experience.tsx";
-import SVG from "../assets/roundpath.svg";
+import Vector from "../assets/Vector.svg";
 import data from "../data/index.ts";
 
 const About = () => (
@@ -30,7 +30,7 @@ const About = () => (
       </Skills>
       <Experience />
       <RoundPath>
-        <img src={SVG} alt="" />
+        <img src={Vector} alt="" />
       </RoundPath>
     </div>
   </AboutWrap>
@@ -85,11 +85,10 @@ const Skills = styled.div`
 `;
 
 const RoundPath = styled.div`
-  width: 250px;
-  height: 250px;
+  width: 70%;
   position: absolute;
-  top: 18%;
-  right: -100px;
+  top: 5%;
+  left: -70%;
 
   img {
     width: 100%;

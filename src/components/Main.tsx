@@ -1,8 +1,9 @@
 /* eslint-disable object-shorthand */
-import React, { useEffect, useRef, useState } from "react";
-import { styled, keyframes, css } from "styled-components";
+import React, { useEffect, useRef } from "react";
+import { styled, keyframes } from "styled-components";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { gsap } from "gsap";
+import polygon1 from "../assets/polygon1.svg";
 
 const Main = () => {
   const main = useRef<HTMLElement>(null);
@@ -89,10 +90,22 @@ const Main = () => {
 
     if (!t2.current) return;
     t2.current.play();
-    t2.current.to(".p2", time, {
+    t2.current.to(".p2", {
+      duration: time,
       repeat: -1,
       x: -totalDistance,
       ease: "none",
+    });
+  };
+
+  const polygon = () => {
+    gsap.to(".polygon1", {
+      duration: 0.3,
+      x: -400,
+      y: -400,
+      opacity: 1,
+      rotate: -120,
+      ease: "power2.Out",
     });
   };
 
@@ -100,10 +113,12 @@ const Main = () => {
     typeAni1();
     typeAni2();
     marquee();
+    // polygon();
   }, []);
 
   return (
     <MainWrap ref={main}>
+      <Polygon1 src={polygon1} alt="" className="polygon1" />
       <GridBox>
         <Greeting>
           <Inner>
@@ -158,6 +173,7 @@ const MainWrap = styled.section`
   font-family: "Montserrat", sans-serif;
   font-size: calc(1rem + 4.5vw);
   font-weight: 600;
+  position: relative;
 
   p {
     white-space: nowrap;
@@ -166,6 +182,15 @@ const MainWrap = styled.section`
   span {
     white-space: nowrap;
   }
+`;
+
+const Polygon1 = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  rotate: 30%;
 `;
 
 const GridBox = styled.div`
@@ -251,7 +276,7 @@ const Paragragh1 = styled.div`
 `;
 
 const textclip = keyframes`
-  100% {background-position: 200% center;}
+  100% { background-position: 200% center; }
 `;
 
 const Paragragh2 = styled.div<{ move?: number; forward?: boolean }>`
@@ -263,12 +288,11 @@ const Paragragh2 = styled.div<{ move?: number; forward?: boolean }>`
 
   p {
     margin-right: 20px;
-    /* color: ${({ theme }) => theme.color.appColor}; */
     background: linear-gradient(90deg, rgba(29, 255, 142, 1) 0%, rgba(255, 242, 68, 1) 56%, rgba(255, 255, 255, 1) 89%);
     background-size: 200% auto;
     color: transparent;
     -moz-background-clip: text;
     -webkit-background-clip: text;
-    animation: ${textclip} 3s linear infinite;
+    animation: ${textclip} 5s linear infinite;
   }
 `;
