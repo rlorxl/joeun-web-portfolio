@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Experience from "./Experience.tsx";
 import Vector from "../assets/Vector.svg";
+import Experience from "./Experience.tsx";
 import data from "../data/index.ts";
 
 const About = () => {
@@ -42,7 +42,7 @@ const About = () => {
       scrollTrigger: {
         trigger: ".about",
         scrub: 100,
-        toggleActions: "play none reverse none",
+        toggleActions: "restart none none none",
       },
       rotation: 360,
     });
@@ -69,7 +69,7 @@ const About = () => {
       <div>
         <Description>
           <h2 id="about" className="about">
-            {"About".split("").map((item, i) => (
+            {"About.".split("").map((item, i) => (
               <span key={i} className="about__heading">
                 {item}
               </span>
@@ -169,16 +169,6 @@ const Skills = styled.div`
     border-radius: 80px;
     border: 2px solid ${({ theme }) => theme.color.borderColor};
   }
-`;
-
-const OverWrap = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background: #242424;
 `;
 
 const RoundPath = styled.div`

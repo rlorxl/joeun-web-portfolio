@@ -42,7 +42,7 @@ const Experience = () => {
   return (
     <ExperienceWrap>
       <h2 className="experience">
-        {"Experience".split("").map((item, i) => (
+        {"Experience.".split("").map((item, i) => (
           <span key={i} className="experience__heading">
             {item}
           </span>

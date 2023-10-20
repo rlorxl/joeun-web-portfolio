@@ -1,39 +1,84 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { styled } from "styled-components";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Data from "../data/index.ts";
 
-const Works = () => (
-  <WorksWrap>
-    <h1 id="works">
-      <span>frontend</span>
-      <span>works</span>
-    </h1>
+const Works = () => {
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.defaults({
+    trigger: ".works",
+    toggleActions: "restart none none none",
+  });
 
-    <ul>
-      {Array(5)
-        .fill("")
-        .map((item, i) => (
-          <li key={i}>
+  useEffect(() => {
+    gsap.fromTo(
+      ".bg-word1",
+      {
+        xPercent: -50,
+      },
+      {
+        scrollTrigger: {},
+        xPercent: 0,
+        duration: 1.5,
+        ease: "power3.Out",
+      }
+    );
+    gsap.fromTo(
+      ".bg-word2",
+      {
+        xPercent: 50,
+      },
+      {
+        scrollTrigger: {},
+        xPercent: 0,
+        duration: 1.2,
+        ease: "power3.Out",
+      }
+    );
+  }, []);
+
+  return (
+    <WorksWrap>
+      <h1 id="works" className="works">
+        <span className="bg-word1">frontend</span>
+        <span className="bg-word2">works</span>
+      </h1>
+      <ul>
+        {Data.projects.map(({ id, name, date, src, stack, description, link, portfolioLink }, i) => (
+          <li key={i} id={id}>
             <ImageBox>
-              {/* <a href=""> */}
-              <div>{/* <img src="" alt="" /> */}</div>
-              <div>
-                <span>Next.js</span>
-                <span>Typescript</span>
-                <span>Tailwind</span>
-                <span>Recoil</span>
-              </div>
-              {/* </a> */}
+              <a href={link} target="_blank" rel="noreferrer">
+                <div>
+                  <img src={src.path} alt={src.alt} />
+                </div>
+                <div>
+                  {stack.map((item, i) => (
+                    <span key={i}>{item}</span>
+                  ))}
+                </div>
+              </a>
             </ImageBox>
             <DescBox>
-              <p>개인 블로그</p>
-              <p>2023.09~</p>
-              <button type="button">Portfolio</button>
+              <p>{name}</p>
+              <p>{date}</p>
+              <div>
+                {description.map((desc, i) => (
+                  <p key={desc + i}>{desc}</p>
+                ))}
+              </div>
+              {portfolioLink !== "" && (
+                <Button href={portfolioLink} target="_blank" rel="noreferrer">
+                  Portfolio
+                </Button>
+              )}
             </DescBox>
           </li>
         ))}
-    </ul>
-  </WorksWrap>
-);
+      </ul>
+    </WorksWrap>
+  );
+};
 
 export default Works;
 
@@ -53,10 +98,10 @@ const WorksWrap = styled.section`
     position: sticky;
     top: 0;
     z-index: -1;
-  }
 
-  span:nth-child(2) {
-    align-self: flex-end;
+    span:nth-child(2) {
+      align-self: flex-end;
+    }
   }
 
   ul {
@@ -71,17 +116,27 @@ const WorksWrap = styled.section`
     ${({ theme }) => theme.mixins.flexBox({ justify: "start" })};
     gap: 150px;
   }
+
+  a {
+    cursor: none;
+  }
 `;
 
 const ImageBox = styled.div`
   width: 800px;
   border: 2px solid ${({ theme }) => theme.color.borderColor};
   border-radius: 25px;
+  overflow: hidden;
 
   div:nth-child(1) {
     width: 100%;
     height: 300px;
-    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   div:nth-child(2) {
@@ -89,7 +144,6 @@ const ImageBox = styled.div`
     padding: 20px;
 
     span {
-      width: 100px;
       height: 32px;
       display: inline-flex;
       flex-wrap: wrap;
@@ -99,35 +153,61 @@ const ImageBox = styled.div`
       border: 2px solid ${({ theme }) => theme.color.borderColor};
       border-radius: 50px;
       margin-right: 12px;
+      margin-bottom: 8px;
+      white-space: nowrap;
     }
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 `;
 
 const DescBox = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.medium2};
-
-  p:nth-child(1) {
+  & > p:nth-child(1) {
     font-size: ${({ theme }) => theme.fontSize.large};
+    color: ${({ theme }) => theme.fontSize.appColor};
     font-weight: 700;
   }
 
-  button {
-    width: 138px;
-    height: 48px;
-    border: none;
-    border-radius: 25px;
-    background-color: #fff;
-    margin-top: 28px;
-    cursor: pointer;
-    font-size: ${({ theme }) => theme.fontSize.base};
-    font-weight: 700;
-    color: #222;
-    text-transform: uppercase;
+  & > p:nth-child(2) {
+    font-size: ${({ theme }) => theme.fontSize.small};
+    font-weight: 600;
+    margin-bottom: 20px;
   }
+
+  & > div {
+    width: 600px;
+    font-size: ${({ theme }) => theme.fontSize.medium2};
+    color: #dddddd;
+
+    p {
+      padding-left: 16px;
+      margin-bottom: 6px;
+      position: relative;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: ${({ theme }) => theme.color.appColor};
+        opacity: 0.5;
+      }
+    }
+  }
+`;
+
+const Button = styled.a`
+  width: 158px;
+  height: 52px;
+  ${({ theme }) => theme.mixins.flexBox()};
+  border-radius: 25px;
+  background-color: #fff;
+  margin-top: 28px;
+  font-size: ${({ theme }) => theme.fontSize.base};
+  font-weight: 700;
+  color: #222;
+  text-transform: uppercase;
 `;

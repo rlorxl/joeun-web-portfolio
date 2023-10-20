@@ -19,6 +19,7 @@ const CursorStyle = styled.div`
   margin-left: -20px;
   margin-top: -20px;
   opacity: 0.5;
+  z-index: 999;
 `;
 
 const SmallCursor = styled.div`
@@ -29,4 +30,5 @@ const SmallCursor = styled.div`
   border-radius: 50%;
   margin-left: -6px;
   margin-top: -6px;
+  z-index: 999;
 `;

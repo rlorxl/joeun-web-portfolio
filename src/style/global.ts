@@ -23,16 +23,6 @@ body::-webkit-scrollbar {
   background-color: #242424;
 }
 
-div,
-section,
-header,
-footer,
-p,
-h1,
-h2 {
-  box-sizing: border-box;
-}
-
 body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
@@ -46,6 +36,16 @@ body {
   -ms-user-select:none;
   user-select:none;
   cursor: none;
+}
+
+div,
+section,
+header,
+footer,
+p,
+h1,
+h2 {
+  box-sizing: border-box;
 }
 
 ul,li {
