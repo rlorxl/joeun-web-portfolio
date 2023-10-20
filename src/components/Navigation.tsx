@@ -32,7 +32,7 @@ const Navigation = () => {
           <a href="#works">Works</a>
         </li>
         <li className="nav">
-          <a href="#contact">About</a>
+          <a href="#contact">Contact</a>
         </li>
       </ul>
     </NavigationWrap>

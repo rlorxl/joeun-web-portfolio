@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Data from "../data/index.ts";
+import CursorContext from "../context/cursor.tsx";
 
 const Works = () => {
+  const ctx = useContext(CursorContext);
+
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.defaults({
     trigger: ".works",
@@ -47,7 +50,7 @@ const Works = () => {
       <ul>
         {Data.projects.map(({ id, name, date, src, stack, description, link, portfolioLink }, i) => (
           <li key={i} id={id}>
-            <ImageBox>
+            <ImageBox onMouseEnter={() => ctx.mouseHandler()} onMouseLeave={() => ctx.mouseHandler()}>
               <a href={link} target="_blank" rel="noreferrer">
                 <div>
                   <img src={src.path} alt={src.alt} />

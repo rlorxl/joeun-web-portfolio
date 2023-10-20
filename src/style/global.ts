@@ -55,6 +55,7 @@ ul,li {
 a {
   text-decoration: none;
   color: #f0f0f0;
+  cursor: none;
 }
 
 h1, h2 {

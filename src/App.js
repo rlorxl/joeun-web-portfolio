@@ -10,19 +10,10 @@ import Cursor from "./ui/Cursor.tsx";
 import useMouse from "./hooks/useMouse.tsx";
 
 function App() {
-  useMouse();
-  useEffect(() => {
-    // gsap.to(".overlay", {
-    //   duration: 0.5,
-    //   width: 0,
-    //   ease: "power3,Out",
-    //   stagger: { amount: 0.5 },
-    // });
-    // setTimeout(() => scrollTo(0, 0), 100);
-  }, []);
+  const [mousemoveHandler] = useMouse();
 
   return (
-    <div className="App">
+    <div className="App" onMouseMove={mousemoveHandler}>
       {/* {Array(8)
         .fill("")
         .map((_, i) => (

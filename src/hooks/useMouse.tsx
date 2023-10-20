@@ -2,43 +2,47 @@ import { gsap } from "gsap";
 import { useEffect } from "react";
 
 const useMouse = () => {
-  useEffect(() => {
-    let mouseX = 0;
-    let mouseY = 0;
-    let smallMouseX = 0;
-    let smallMouseY = 0;
+  const coordinate = {
+    mouseX: 0,
+    mouseY: 0,
+    smallMouseX: 0,
+    smallMouseY: 0,
+  };
 
+  const mousemoveHandler = (e: MouseEvent) => {
+    coordinate.smallMouseX = e.clientX;
+    coordinate.smallMouseY = e.clientY;
+    setTimeout(() => {
+      coordinate.mouseX = e.clientX;
+      coordinate.mouseY = e.clientY;
+    }, 250);
+  };
+
+  useEffect(() => {
     gsap.to(
       {},
       {
-        duration: 0.016,
+        duration: 0.1,
         repeat: -1,
         onRepeat: () => {
           gsap.set(".cursor", {
             css: {
-              left: mouseX,
-              top: mouseY,
+              left: coordinate.mouseX,
+              top: coordinate.mouseY,
             },
           });
           gsap.set(".cursor-s", {
             css: {
-              left: smallMouseX,
-              top: smallMouseY,
+              left: coordinate.smallMouseX,
+              top: coordinate.smallMouseY,
             },
           });
         },
       }
     );
-
-    window.addEventListener("mousemove", (e: MouseEvent) => {
-      smallMouseX = e.clientX;
-      smallMouseY = e.clientY;
-      setTimeout(() => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      }, 250);
-    });
   }, []);
+
+  return [mousemoveHandler];
 };
 
 export default useMouse;
