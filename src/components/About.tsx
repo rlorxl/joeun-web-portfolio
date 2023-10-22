@@ -7,13 +7,13 @@ import Experience from "./Experience.tsx";
 import data from "../data/index.ts";
 
 const About = () => {
-  gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.defaults({
-    toggleActions: "restart none none none",
-    start: "top 70%",
-  });
-
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.defaults({
+      toggleActions: "restart none none none",
+      start: "top 70%",
+    });
+
     // intro
     gsap.to(".about__heading", {
       scrollTrigger: {

@@ -5,14 +5,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import data from "../data/index.ts";
 
 const Experience = () => {
-  gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.defaults({
-    trigger: ".experience",
-    start: "top 70%",
-  });
   const experiences = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.defaults({
+      trigger: ".experience",
+      start: "top 70%",
+    });
+
     gsap.to(".experience__heading", {
       scrollTrigger: {
         toggleActions: "restart none none none",
@@ -29,7 +30,6 @@ const Experience = () => {
       gsap.to(target, {
         scrollTrigger: {
           trigger: target,
-          toggleActions: "play none none none",
         },
         y: 0,
         opacity: 1,
@@ -40,8 +40,8 @@ const Experience = () => {
   }, []);
 
   return (
-    <ExperienceWrap>
-      <h2 className="experience">
+    <ExperienceWrap className="experience">
+      <h2>
         {"Experience.".split("").map((item, i) => (
           <span key={i} className="experience__heading">
             {item}

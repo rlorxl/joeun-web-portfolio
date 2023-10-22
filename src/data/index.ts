@@ -1,5 +1,24 @@
 import * as Images from "../assets/works/index.ts";
 
+type Experiences = {
+  duration: string;
+  title: string;
+  descriptions: string[];
+  detail?: string[];
+};
+
+type Projects = {
+  id: string;
+  name: string;
+  date: string;
+  src: { path: string; alt: string };
+  stack: string[];
+  description: string[];
+  link: string;
+  portfolioLink?: string;
+  githubLink?: string;
+};
+
 const skills: string[] = [
   "Javascript",
   "React",
@@ -19,7 +38,7 @@ const skills: string[] = [
   "illustrator",
 ];
 
-const experiences: { duration: string; title: string; descriptions: string[]; detail?: string[] }[] = [
+const experiences: Experiences[] = [
   {
     duration: "2022.12 - 2022.01",
     title: "원티드 프리온보딩 프론트엔드 인턴십",
@@ -61,10 +80,10 @@ const experiences: { duration: string; title: string; descriptions: string[]; de
   },
 ];
 
-const projects = [
+const projects: Projects[] = [
   {
     id: "project1",
-    name: "개인 블로그 구축",
+    name: "개인 블로그",
     date: "2023.09",
     src: {
       path: Images.default.work1,
@@ -72,11 +91,10 @@ const projects = [
     },
     stack: ["Next.js", "Typescript", "Tailwind", "Recoil"],
     description: [
-      "Next.js의 이해도를 높이고 하나뿐인 블로그를 만들기 위해 개발중입니다.",
-      "cookie를 활용한 다크모드를 구현하고, 페이지별 메타태그를 적용했습니다.",
+      "Next.js의 이해도를 높이고 하나뿐인 블로그를 만들기 위해 개발중",
+      "cookie를 활용한 다크모드를 구현하고, 페이지별 메타태그를 적용",
     ],
     link: "https://rlorxl.me",
-    portfolioLink: "",
   },
   {
     id: "project2",
@@ -88,13 +106,56 @@ const projects = [
     },
     stack: ["Next.js", "Typescript", "Tailwind", "Recoil", "React-query", "prisma", "S3"],
     description: [
-      "중고 거래 & 렌탈 커머스 사이트 웹앱.",
-      "전체 ui설계와 페이지를 기획했습니다",
-      "실제 사용되는 이커머스 플랫폼이라고 가정하고 게시물 업로드 로직을 구현했습니다.",
-      "서버리스db를 활용하여 유저별 데이터를 관리하였습니다.",
+      "중고 거래 & 렌탈 커머스 사이트 웹앱",
+      "전체 ui설계와 페이지를 기획",
+      "실제 사용되는 이커머스 플랫폼이라고 가정하고 게시물 업로드 로직을 구현",
+      "서버리스db를 활용하여 유저별 데이터를 관리",
     ],
     link: "https://panda-vert.vercel.app/",
     portfolioLink: "https://notion.so/Panda-6261ca29817949c2b93448910f6a4c90",
+  },
+  {
+    id: "project3",
+    name: "시외버스 예매",
+    date: "2022.10",
+    src: {
+      path: Images.default.work3,
+      alt: "프로젝트3",
+    },
+    stack: ["React", "Styled-components", "Redux", "ContextAPI", "Firebase"],
+    description: [
+      "Open API를 이용한  시외버스 예매 기능 구현하기",
+      "Firebase Authentication을 이용한 로그인, 회원가입",
+      "jwt로 유저의 인증을 확인하고 이에 따른 동적 라우팅 구현",
+    ],
+    link: "https://react-tmoney-bus.vercel.app/login",
+    portfolioLink: "https://www.notion.so/7c0fe83095b548c9be68bfd8154b0f2d",
+  },
+  {
+    id: "project4",
+    name: "RIDI Webtoon",
+    date: "2022.08",
+    src: {
+      path: Images.default.work4,
+      alt: "프로젝트4",
+    },
+    stack: ["Javascript", "SCSS"],
+    description: ["RIDI Webtoon 클론&개선 프로젝트", "바닐라 자바스크립트로 RIDI웹툰 사이트를 클론코딩하여 SPA를 구현"],
+    link: "https://ridiwebtoon-clone-1f3ce80a7f8e.herokuapp.com/",
+    portfolioLink: "https://www.notion.so/RIDI-2e70feca707e45f1b4ce1ad1de69cf84",
+  },
+  {
+    id: "project5",
+    name: "Melon 웹사이트",
+    date: "2023.07",
+    src: {
+      path: Images.default.work5,
+      alt: "프로젝트5",
+    },
+    stack: ["Javascript", "SCSS"],
+    description: ["Melon 웹사이트 클론 & 개선 프로젝트", "클론코딩, 반응형 구현"],
+    link: "https://rlorxl.github.io/responsive-website-melon.github.io/",
+    githubLink: "https://github.com/rlorxl/responsive-website-melon.github.io",
   },
 ];
 

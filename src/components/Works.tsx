@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { styled } from "styled-components";
+import React, { useContext, useEffect, useRef } from "react";
+import { css, styled } from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Data from "../data/index.ts";
@@ -7,50 +7,102 @@ import CursorContext from "../context/cursor.tsx";
 
 const Works = () => {
   const ctx = useContext(CursorContext);
+  const bgWord1 = useRef<HTMLSpanElement>(null);
+  const bgWord2 = useRef<HTMLSpanElement>(null);
+  const t1 = useRef<GSAPTimeline>();
+  const t2 = useRef<GSAPTimeline>();
 
-  gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.defaults({
-    trigger: ".works",
-    toggleActions: "restart none none none",
-  });
+  const changeText = () => {
+    if (!bgWord1.current || !bgWord2.current) return;
+    bgWord1.current.textContent = "Responsible";
+    bgWord2.current.textContent = "Web";
+  };
+
+  const resetText = (reset?: boolean) => {
+    if (!bgWord1.current || !bgWord2.current || !reset) return;
+    bgWord1.current.textContent = "Frontend";
+    bgWord2.current.textContent = "Works";
+  };
+
+  const enter = () => {
+    if (!t1.current || !t2.current) return;
+    t1.current.play();
+    t2.current.play();
+  };
 
   useEffect(() => {
-    gsap.fromTo(
-      ".bg-word1",
-      {
-        xPercent: -50,
+    gsap.registerPlugin(ScrollTrigger);
+
+    const scroll = ScrollTrigger.create({
+      trigger: ".project1",
+      start: "top center",
+      end: "+=1800px",
+      onEnter: enter,
+      onEnterBack: () => {
+        resetText(true);
+        t1.current?.restart();
+        t2.current?.clear().fromTo(
+          ".bg-word2",
+          { xPercent: 50 }, // 이전 동작에 의해 현재 위치가 (xPercent: -100)이므로 위치를 재조정 해줌.
+          {
+            xPercent: -50,
+            duration: 1.2,
+            ease: "power3.Out",
+          }
+        );
       },
-      {
-        scrollTrigger: {},
+      onLeave: () => {
+        changeText();
+        t1.current?.restart();
+        t2.current?.restart();
+        t2.current?.to(".bg-word2", {
+          xPercent: -100,
+          duration: 1.2,
+          ease: "power3.Out",
+        });
+      },
+    });
+
+    t1.current = gsap
+      .timeline({
+        paused: true,
+        scrollTrigger: scroll,
+      })
+      .to(".bg-word1", {
         xPercent: 0,
         duration: 1.5,
         ease: "power3.Out",
-      }
-    );
-    gsap.fromTo(
-      ".bg-word2",
-      {
-        xPercent: 50,
-      },
-      {
-        scrollTrigger: {},
-        xPercent: 0,
+      });
+
+    t2.current = gsap
+      .timeline({
+        paused: true,
+        scrollTrigger: scroll,
+      })
+      .to(".bg-word2", {
+        xPercent: -50,
         duration: 1.2,
         ease: "power3.Out",
-      }
-    );
+      });
   }, []);
 
   return (
     <WorksWrap>
       <h1 id="works" className="works">
-        <span className="bg-word1">frontend</span>
-        <span className="bg-word2">works</span>
+        Works.
       </h1>
+      <h2>
+        <span className="bg-word1" ref={bgWord1}>
+          frontend
+        </span>
+        <span className="bg-word2" ref={bgWord2}>
+          works
+        </span>
+      </h2>
       <ul>
-        {Data.projects.map(({ id, name, date, src, stack, description, link, portfolioLink }, i) => (
-          <li key={i} id={id}>
-            <ImageBox onMouseEnter={() => ctx.mouseHandler()} onMouseLeave={() => ctx.mouseHandler()}>
+        {Data.projects.map(({ id, name, date, src, stack, description, link, portfolioLink, githubLink }, i) => (
+          <li key={i} id={id} className={id}>
+            <ImageBox imageid={id} onMouseEnter={() => ctx.mouseHandler()} onMouseLeave={() => ctx.mouseHandler()}>
               <a href={link} target="_blank" rel="noreferrer">
                 <div>
                   <img src={src.path} alt={src.alt} />
@@ -63,16 +115,23 @@ const Works = () => {
               </a>
             </ImageBox>
             <DescBox>
-              <p>{name}</p>
-              <p>{date}</p>
+              <p>
+                <span>{name}</span>
+                <span>{date}</span>
+              </p>
               <div>
                 {description.map((desc, i) => (
                   <p key={desc + i}>{desc}</p>
                 ))}
               </div>
-              {portfolioLink !== "" && (
+              {portfolioLink && (
                 <Button href={portfolioLink} target="_blank" rel="noreferrer">
                   Portfolio
+                </Button>
+              )}
+              {githubLink && (
+                <Button href={githubLink} target="_blank" rel="noreferrer">
+                  Github
                 </Button>
               )}
             </DescBox>
@@ -92,17 +151,31 @@ const WorksWrap = styled.section`
   margin-bottom: 12rem;
 
   h1 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    color: ${({ theme }) => theme.color.appColor};
+  }
+
+  h2 {
     grid-area: 1/1/-1/-1;
     width: 100%;
     height: 100vh;
     font-size: calc(1.2rem + 10vw);
+    color: ${({ theme }) => theme.color.white};
     opacity: 10%;
     ${({ theme }) => theme.mixins.flexBox({ align: "start", justify: "space-between" })}
     position: sticky;
     top: 0;
     z-index: -1;
 
+    span:nth-child(1) {
+      transform: translate(-50%);
+    }
+
     span:nth-child(2) {
+      transform: translate(50%);
       align-self: flex-end;
     }
   }
@@ -125,11 +198,15 @@ const WorksWrap = styled.section`
   }
 `;
 
-const ImageBox = styled.div`
+const ImageBox = styled.div<{ imageid: string }>`
   width: 800px;
   border: 2px solid ${({ theme }) => theme.color.borderColor};
   border-radius: 25px;
   overflow: hidden;
+
+  div {
+    overflow: hidden;
+  }
 
   div:nth-child(1) {
     width: 100%;
@@ -160,19 +237,32 @@ const ImageBox = styled.div`
       white-space: nowrap;
     }
   }
+
+  ${({ imageid }) =>
+    imageid === "project3" &&
+    css`
+      img {
+        object-fit: contain !important;
+        transform: scale(3) translateY(100px);
+      }
+    `}
 `;
 
 const DescBox = styled.div`
-  & > p:nth-child(1) {
-    font-size: ${({ theme }) => theme.fontSize.large};
-    color: ${({ theme }) => theme.fontSize.appColor};
-    font-weight: 700;
-  }
+  & > p {
+    margin-bottom: 30px;
 
-  & > p:nth-child(2) {
-    font-size: ${({ theme }) => theme.fontSize.small};
-    font-weight: 600;
-    margin-bottom: 20px;
+    span:nth-child(1) {
+      font-size: ${({ theme }) => theme.fontSize.large};
+      color: ${({ theme }) => theme.fontSize.appColor};
+      font-weight: 700;
+    }
+
+    span:nth-child(2) {
+      font-size: ${({ theme }) => theme.fontSize.small};
+      font-weight: 600;
+      margin-left: 20px;
+    }
   }
 
   & > div {
@@ -203,13 +293,13 @@ const DescBox = styled.div`
 `;
 
 const Button = styled.a`
-  width: 158px;
-  height: 52px;
+  width: 175px;
+  height: 64px;
   ${({ theme }) => theme.mixins.flexBox()};
-  border-radius: 25px;
+  border-radius: 45px;
   background-color: #fff;
-  margin-top: 28px;
-  font-size: ${({ theme }) => theme.fontSize.base};
+  margin-top: 30px;
+  font-size: ${({ theme }) => theme.fontSize.medium2};
   font-weight: 700;
   color: #222;
   text-transform: uppercase;
