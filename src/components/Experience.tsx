@@ -30,6 +30,7 @@ const Experience = () => {
       gsap.to(target, {
         scrollTrigger: {
           trigger: target,
+          toggleActions: "play none none none",
         },
         y: 0,
         opacity: 1,
@@ -97,9 +98,23 @@ const ExperienceWrap = styled.div`
     display: flex;
     gap: 130px;
     margin-bottom: 40px;
-    font-size: ${({ theme }) => theme.fontSize.medium2};
+    font-size: calc(0.6rem + 0.5vw);
     transform: translateY(100%);
     opacity: 0;
+  }
+
+  @media screen and (max-width: 980px) {
+    li {
+      gap: 60px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    li {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 60px;
+    }
   }
 `;
 
@@ -117,7 +132,7 @@ const Detail = styled.span`
 `;
 
 const Title = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.medium1};
+  font-size: calc(0.8rem + 0.5vw);
   font-weight: 700;
   margin-bottom: 15px;
 `;

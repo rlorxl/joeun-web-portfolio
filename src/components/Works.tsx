@@ -181,8 +181,7 @@ const WorksWrap = styled.section`
   }
 
   ul {
-    padding: 0 12rem;
-    grid-area: 1/1/-1/-1;
+    grid-area: 1/2/-1/-2;
     padding-top: 10rem;
   }
 
@@ -196,13 +195,34 @@ const WorksWrap = styled.section`
   a {
     cursor: none;
   }
+
+  @media screen and (max-width: 1600px) {
+    ul {
+      grid-area: 1/1/-1/-1;
+      padding: 10rem 5rem;
+    }
+
+    li {
+      gap: 100px;
+    }
+  }
+
+  @media screen and (max-width: 1080px) {
+    li {
+      ${({ theme }) => theme.mixins.flexBox({ direction: "column", justify: "start", align: "flex-start" })};
+      height: 800px;
+      gap: 37px;
+    }
+  }
 `;
 
 const ImageBox = styled.div<{ imageid: string }>`
-  width: 800px;
+  max-width: 800px;
   border: 2px solid ${({ theme }) => theme.color.borderColor};
   border-radius: 25px;
   overflow: hidden;
+  flex-basis: 435px;
+  flex-grow: 1;
 
   div {
     overflow: hidden;
@@ -210,7 +230,7 @@ const ImageBox = styled.div<{ imageid: string }>`
 
   div:nth-child(1) {
     width: 100%;
-    height: 300px;
+    max-height: 300px;
 
     img {
       width: 100%;
@@ -220,7 +240,7 @@ const ImageBox = styled.div<{ imageid: string }>`
   }
 
   div:nth-child(2) {
-    height: 155px;
+    min-height: 155px;
     padding: 20px;
 
     span {
@@ -242,13 +262,28 @@ const ImageBox = styled.div<{ imageid: string }>`
     imageid === "project3" &&
     css`
       img {
-        object-fit: contain !important;
-        transform: scale(3) translateY(100px);
+        transform: scale(1.5);
       }
     `}
+
+  @media screen and (max-width: 1600px) {
+    min-width: 485px;
+
+    span {
+      padding: 8px 18px;
+      font-size: ${({ theme }) => theme.fontSize.small};
+    }
+  }
+
+  @media screen and (max-width: 1080px) {
+    flex-shrink: 0;
+    flex-basis: auto;
+  }
 `;
 
 const DescBox = styled.div`
+  flex: 1 250px;
+
   & > p {
     margin-bottom: 30px;
 
@@ -266,7 +301,6 @@ const DescBox = styled.div`
   }
 
   & > div {
-    width: 600px;
     font-size: ${({ theme }) => theme.fontSize.medium2};
     color: #dddddd;
 

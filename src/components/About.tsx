@@ -116,6 +116,10 @@ const AboutWrap = styled.section`
   margin: 12rem auto;
   max-width: 1080px;
   position: relative;
+
+  @media screen and (max-width: 1280px) {
+    padding: 0 4rem;
+  }
 `;
 
 const Description = styled.div`
@@ -124,11 +128,20 @@ const Description = styled.div`
 
   h2 {
     overflow: hidden;
+    flex-shrink: 0;
 
     span {
       display: inline-block;
       transform: translateY(100%);
       opacity: 0;
+    }
+  }
+
+  @media screen and (max-width: 980px) {
+    gap: 98px;
+
+    h2 {
+      width: 120px;
     }
   }
 `;
@@ -180,5 +193,11 @@ const RoundPath = styled.div`
   img {
     width: 100%;
     height: 100%;
+  }
+
+  @media screen and (max-width: 1280px) {
+    width: 60%;
+    top: 3%;
+    left: -45%;
   }
 `;

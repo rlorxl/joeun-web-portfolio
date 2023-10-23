@@ -44,11 +44,11 @@ const Main = () => {
     t3.current.play();
     t3.current.set(".p1", {
       visibility: "visible",
-      y: "90%",
+      yPercent: 90,
     });
     t3.current
       .to(".p1", {
-        y: 0,
+        yPercent: 0,
         duration: 0.4,
         ease: "power3.Out",
         stagger: { amount: 0.8 },
@@ -61,12 +61,11 @@ const Main = () => {
       .fromTo(
         ".p1-1",
         {
-          x: -220,
-          y: "90%",
+          yPercent: 50,
         },
         {
           visibility: "visible",
-          y: 0,
+          yPercent: -100,
           duration: 0.4,
           ease: "power3.Out",
           stagger: { amount: 0.8 },
@@ -97,33 +96,32 @@ const Main = () => {
       ease: "none",
     });
   };
-
-  const polygon = () => {
-    gsap.to(".polygon1", {
-      duration: 0.3,
-      x: -400,
-      y: -400,
-      opacity: 1,
-      rotate: -120,
-      ease: "power2.Out",
-    });
-  };
-
   useEffect(() => {
     typeAni1();
     typeAni2();
     marquee();
-    // polygon();
   }, []);
 
   return (
     <MainWrap ref={main}>
-      <Polygon1 src={polygon1} alt="" className="polygon1" />
       <GridBox>
         <Greeting>
           <Inner>
             <En>
-              {"Hello World✨.".split("").map((word, i) => (
+              {"Hello".split("").map((word, i) => {
+                if (i === 4)
+                  return (
+                    <span key={i} className="en" style={{ marginRight: "30px" }}>
+                      {word}
+                    </span>
+                  );
+                return (
+                  <span key={i} className="en">
+                    {word}
+                  </span>
+                );
+              })}
+              {"World✨".split("").map((word, i) => (
                 <span key={i} className="en">
                   {word}
                 </span>
@@ -140,16 +138,22 @@ const Main = () => {
           <Name style={{ marginLeft: "60px" }}>I'm Joeun,</Name>
         </Greeting>
         <Paragragh1>
-          {"Sensible".split("").map((word, i) => (
-            <span key={i} className="p1" style={{ transform: "translate(180px)" }}>
-              {word}
-            </span>
-          ))}
-          {"Steady".split("").map((word, i) => (
-            <span key={i} className="p1-1">
-              {word}
-            </span>
-          ))}
+          <div>
+            <p>
+              {"Sensible".split("").map((word, i) => (
+                <span key={i} className="p1">
+                  {word}
+                </span>
+              ))}
+            </p>
+            <p>
+              {"Steady".split("").map((word, i) => (
+                <span key={i} className="p1-1">
+                  {word}
+                </span>
+              ))}
+            </p>
+          </div>
         </Paragragh1>
         <Paragragh2>
           <p className="p2" ref={p2}>
@@ -182,15 +186,10 @@ const MainWrap = styled.section`
   span {
     white-space: nowrap;
   }
-`;
 
-const Polygon1 = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  rotate: 30%;
+  @media screen and (max-width: 768px) {
+    padding: 0 5rem;
+  }
 `;
 
 const GridBox = styled.div`
@@ -207,9 +206,26 @@ const Greeting = styled.div`
   display: flex;
   height: 100%;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-end;
   grid-column: 3 / span 4;
-  margin-left: 100px;
+
+  @media screen and (max-width: 980px) {
+    flex-direction: column;
+    align-items: flex-start;
+    grid-column: 1 / span 3;
+
+    span:nth-child(1) {
+      min-height: 50%;
+    }
+    span:nth-child(2) {
+      margin-left: 0 !important;
+    }
+  }
+`;
+
+const blink = keyframes`
+  25% { opacity: 50%; }
+  50% { opacity: 0}; /* 100% X */
 `;
 
 const Inner = styled.span`
@@ -217,6 +233,20 @@ const Inner = styled.span`
   display: flex;
   align-items: center;
   color: #1dff8e;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 80%;
+    background: ${({ theme }) => theme.color.appColor};
+    opacity: 0.8;
+    position: absolute;
+    top: 50%;
+    right: -36px;
+    transform: translateY(-50%);
+    animation: ${blink} 1.2s step-end infinite;
+  }
 `;
 
 const En = styled.span`
@@ -224,8 +254,6 @@ const En = styled.span`
 
   span {
     display: none;
-    width: fit-content;
-    min-width: 40px;
   }
 `;
 
@@ -240,39 +268,38 @@ const Ko = styled.span`
   }
 `;
 
-const blink = keyframes`
-  25% { opacity: 50%; }
-  50% { opacity: 0}; /* 100% X */
-`;
-
 const Name = styled.span`
   display: inline-block;
   position: relative;
-
-  &::before {
-    content: "";
-    display: inline-block;
-    width: 25px;
-    height: 80%;
-    background: ${({ theme }) => theme.color.appColor};
-    opacity: 0.8;
-    position: absolute;
-    top: 50%;
-    left: -35px;
-    transform: translateY(-50%);
-    animation: ${blink} 1.2s step-end infinite;
-  }
 `;
 
 const Paragragh1 = styled.div`
+  height: 50%;
   grid-column: 2 / span 3;
-  display: flex;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.color.appColor};
-  border-radius: 150px;
-  color: #222;
-  margin-left: 100px;
-  overflow: hidden;
+
+  div {
+    height: 100%;
+    padding: 0 calc(10rem + 2.5vw);
+    background-color: ${({ theme }) => theme.color.appColor};
+    border-radius: 150px;
+    color: #222;
+    margin-left: 100px;
+    overflow: hidden;
+  }
+
+  p {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 980px) {
+    grid-column: 1 / span 2;
+    div {
+      margin-left: 0;
+      height: 80%;
+      padding: 0 calc(8rem + 2.5vw);
+    }
+  }
 `;
 
 const textclip = keyframes`
@@ -280,8 +307,9 @@ const textclip = keyframes`
 `;
 
 const Paragragh2 = styled.div<{ move?: number; forward?: boolean }>`
+  height: 100%;
   grid-column: 4 / span 4;
-  border-radius: 150px;
+  border-radius: 25%;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -294,5 +322,10 @@ const Paragragh2 = styled.div<{ move?: number; forward?: boolean }>`
     -moz-background-clip: text;
     -webkit-background-clip: text;
     animation: ${textclip} 5s linear infinite;
+  }
+
+  @media screen and (max-width: 980px) {
+    grid-column: 1 / span 8;
+    border-radius: 15%;
   }
 `;
