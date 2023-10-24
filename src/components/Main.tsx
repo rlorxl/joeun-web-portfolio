@@ -98,7 +98,7 @@ const Main = () => {
   useEffect(() => {
     typeAni1();
     typeAni2();
-    marquee();
+    window.addEventListener("resize", marquee);
   }, []);
 
   return (

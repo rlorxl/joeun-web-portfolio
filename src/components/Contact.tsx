@@ -10,14 +10,18 @@ const Contact = () => {
 
   const changeBgColor = () => {
     gsap.to(".main", {
-      background: "#1dff8e",
+      backgroundColor: "#1dff8e",
+    });
+    gsap.to([".contact", ".contact a"], {
       color: "#222",
     });
   };
 
   const resetBgColor = () => {
     gsap.to(".main", {
-      background: "#242424",
+      backgroundColor: "#111",
+    });
+    gsap.to([".contact", ".contact a"], {
       color: "#f0f0f0",
     });
   };
@@ -34,6 +38,7 @@ const Contact = () => {
     if (!t1.current) return;
     t1.current.to(".email", {
       duration: time,
+      repeat: -1,
       x: -totalDistance,
       ease: "none",
     });
@@ -45,7 +50,7 @@ const Contact = () => {
     gsap.to(".main", {
       scrollTrigger: {
         trigger: ".contact",
-        start: "top center",
+        start: "top 30%",
         toggleActions: "restart none none none",
         onEnter: () => {
           changeBgColor();
@@ -60,7 +65,7 @@ const Contact = () => {
       },
     });
 
-    marquee();
+    window.addEventListener("resize", marquee);
   }, []);
   return (
     <ContactWrap className="contact">
@@ -109,10 +114,6 @@ const ContactWrap = styled.section`
     cursor: pointer;
     margin-top: 32px;
   }
-
-  a {
-    color: #222;
-  }
 `;
 
 const Email = styled.p`
@@ -123,10 +124,6 @@ const Email = styled.p`
   /* text-transform: uppercase; */
   padding: 15rem 0 8rem 0;
   ${({ theme }) => theme.mixins.flexBox()};
-
-  /* span {
-    margin-right: 100px;
-  } */
 `;
 
 const CopyRight = styled.p`

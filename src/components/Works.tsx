@@ -37,31 +37,45 @@ const Works = () => {
       trigger: ".project1",
       start: "top center",
       end: "+=1800px",
+      toggleActions: "restart none none none",
       onEnter: enter,
       onEnterBack: () => {
         resetText(true);
-        t1.current?.restart();
-        t2.current?.clear().fromTo(
-          ".bg-word2",
-          { xPercent: 50 }, // 이전 동작에 의해 현재 위치가 (xPercent: -100)이므로 위치를 재조정 해줌.
-          {
-            xPercent: -50,
-            duration: 1.2,
-            ease: "power3.Out",
-          }
-        );
+        t1.current?.restart(); // 기본값 ~ gsap.to에서 적용한 값이 재실행.
+        t2.current?.restart();
+        // t2.current?.clear().fromTo(
+        //   ".bg-word2",
+        //   // { xPercent: 50 }, // 이전 동작에 의해 현재 위치가 (xPercent: -100)이므로 위치를 재조정 해줌.
+        //   { xPercent: 0 },
+        //   {
+        //     xPercent: -50,
+        //     duration: 1.2,
+        //     ease: "power3.Out",
+        //   }
+        // );
       },
       onLeave: () => {
         changeText();
         t1.current?.restart();
         t2.current?.restart();
-        t2.current?.to(".bg-word2", {
-          xPercent: -100,
-          duration: 1.2,
-          ease: "power3.Out",
-        });
+        // t2.current?.clear().to(".bg-word2", {
+        //   xPercent: -100,
+        //   duration: 1.2,
+        //   ease: "power3.Out",
+        // });
       },
     });
+
+    /*
+      - bg-word1은 translate(-50%), bg-word2는 translate(50%)가 기본값임.
+      - 음수값은 xPercent를 적용했을 때 값을 overwrite하는 의미이지만 양수값은 기본값에서 시작해 몇%만큼 이동할건지를 보는거 같음. 
+        때문에 xPercent: 0 일때 0만큼 이동하고, xPercent: -50을 해야 -50%만큼 다시 이동하면서 제자리로 오는것 같음. 
+        (%값의 특성상 원래 이게 맞는 논리긴 함. 기본이 음수%일때 xPercent가 덮어써지는게 오히려 이상함.)
+      - 그럼 그냥 x: 0은 왜 적용되나??
+        - x: 100, y: 100은 적용하려는 값이 덮어써짐.
+        - 글자가 올라오는 애니메이션 효과를 줄 때 기본값을 translate(0,100%)로 하고 y: 0을 주면 글자가 0만큼 올라오는게 아니라 포지션값이 바뀜. (포지션이 변하는 것처럼 보이지만 css는 translate가 변경됨.)
+      - 그러니까.. x: 0을 적용하는게 이상한게 아니라 translate(-50%)에 xPercent: 0 (translate(0px))을 지정했을 때 위치가 제자리로 오는 이유가 궁금함. 
+    */
 
     t1.current = gsap
       .timeline({
@@ -80,7 +94,7 @@ const Works = () => {
         scrollTrigger: scroll,
       })
       .to(".bg-word2", {
-        xPercent: -50,
+        x: 0,
         duration: 1.2,
         ease: "power3.Out",
       });
@@ -163,12 +177,10 @@ const WorksWrap = styled.section`
     width: 100%;
     height: 100vh;
     font-size: calc(1.2rem + 10vw);
-    color: ${({ theme }) => theme.color.white};
-    opacity: 10%;
+    color: #353535;
     ${({ theme }) => theme.mixins.flexBox({ align: "start", justify: "space-between" })}
     position: sticky;
     top: 0;
-    z-index: -1;
 
     span:nth-child(1) {
       transform: translate(-50%);
@@ -183,6 +195,7 @@ const WorksWrap = styled.section`
   ul {
     grid-area: 1/2/-1/-2;
     padding-top: 10rem;
+    z-index: 10;
   }
 
   li {

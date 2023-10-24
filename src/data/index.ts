@@ -19,6 +19,12 @@ type Projects = {
   githubLink?: string;
 };
 
+type Article = {
+  id: string;
+  title: string;
+  linkTo: string;
+};
+
 const skills: string[] = [
   "Javascript",
   "React",
@@ -71,7 +77,7 @@ const experiences: Experiences[] = [
   {
     duration: "2014.03 - 2014.08",
     title: "sbs아카데미 웹디자인 과정 수료",
-    descriptions: ["photoshop, illustrator학습", "HTML5, CSS, jquery의 기초 교육과정"],
+    descriptions: ["photoshop, illustrator학습", "HTML5, CSS, jquery의 기초 교육과정 수료"],
   },
   {
     duration: "2012.03 - 2017.02",
@@ -159,10 +165,37 @@ const projects: Projects[] = [
   },
 ];
 
+const articles: Article[] = [
+  {
+    id: "article1",
+    title: "mdx태그 스타일링, 조건부 렌더링",
+    linkTo:
+      "https://rlorxl.me/blog/develop/2023/9/mdx%ED%83%9C%EA%B7%B8-%EC%8A%A4%ED%83%80%EC%9D%BC%EB%A7%81,-%EC%A1%B0%EA%B1%B4%EB%B6%80-%EB%A0%8C%EB%8D%94%EB%A7%81",
+  },
+  {
+    id: "article2",
+    title: "Next.js 13 찍먹하기",
+    linkTo: "https://rlorxl.me/blog/develop/2023/9/Next.js-13-%EC%B0%8D%EB%A8%B9%ED%95%98%EA%B8%B0",
+  },
+  {
+    id: "article3",
+    title: "React query로 서버상태 관리 & 데이터 최신으로 업데이트하기",
+    linkTo:
+      "https://velog.io/@rlorxl/React-query%EB%A1%9C-%EC%84%9C%EB%B2%84%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B5%9C%EC%8B%A0%EC%9C%BC%EB%A1%9C-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%ED%95%98%EA%B8%B0",
+  },
+  {
+    id: "article4",
+    title: "클라이언트에서 aws s3에 이미지파일 업로드하기",
+    linkTo:
+      "https://velog.io/@rlorxl/%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EC%97%90%EC%84%9C-aws-s3%EC%97%90-%EC%9D%B4%EB%AF%B8%EC%A7%80%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C%ED%95%98%EA%B8%B0",
+  },
+];
+
 const data = {
   skills,
   experiences,
   projects,
+  articles,
 };
 
 export default data;

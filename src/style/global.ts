@@ -28,7 +28,7 @@ body {
   width: 100vw;
   overflow-x: hidden;
   color: #f0f0f0;
-  background-color: #242424;
+  background-color: #111;
   position: relative;
 
   -webkit-user-select:none;
