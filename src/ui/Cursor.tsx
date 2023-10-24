@@ -1,16 +1,20 @@
-import React from "react";
-import { styled } from "styled-components";
+import React, { useContext } from "react";
+import { css, styled } from "styled-components";
+import CursorContext from "../context/cursor.tsx";
 
-const Cursor = () => (
-  <>
-    <CursorStyle className="cursor" />
-    <SmallCursor className="cursor-s" />
-  </>
-);
+const Cursor = () => {
+  const ctx = useContext(CursorContext);
+  return (
+    <>
+      <CursorStyle className="cursor" enter={ctx.isMouseMove.toString()} />
+      <SmallCursor className="cursor-s" enter={ctx.isMouseMove.toString()} />
+    </>
+  );
+};
 
 export default Cursor;
 
-const CursorStyle = styled.div`
+const CursorStyle = styled.div<{ enter: string }>`
   position: fixed;
   width: 40px;
   height: 40px;
@@ -19,9 +23,32 @@ const CursorStyle = styled.div`
   margin-left: -20px;
   margin-top: -20px;
   opacity: 0.5;
+  transition: transform 0.4s ease;
+  z-index: 999;
+  pointer-events: none; // * 마우스 이벤트가 적용되지 않게 하는 속성
+  mix-blend-mode: difference;
+
+  ${({ enter }) =>
+    enter === "true" &&
+    css`
+      scale: 3.5;
+      opacity: 0.9;
+      font-size: 6px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      mix-blend-mode: normal;
+
+      &::after {
+        content: "view site";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    `}
 `;
 
-const SmallCursor = styled.div`
+const SmallCursor = styled.div<{ enter: string }>`
   position: fixed;
   width: 12px;
   height: 12px;
@@ -29,4 +56,12 @@ const SmallCursor = styled.div`
   border-radius: 50%;
   margin-left: -6px;
   margin-top: -6px;
+  z-index: 999;
+  pointer-events: none;
+
+  ${({ enter }) =>
+    enter === "true" &&
+    css`
+      visibility: hidden;
+    `}
 `;

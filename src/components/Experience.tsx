@@ -1,40 +1,95 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { styled } from "styled-components";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import data from "../data/index.ts";
 
-const Experience = () => (
-  <ExperienceWrap>
-    <h2>Experience</h2>
-    <ul>
-      {data.experiences.map(({ duration, title, descriptions, detail }, i) => (
-        <li key={i}>
-          <div>
-            <Duration>{duration}</Duration>
-            {detail && (
-              <DetailWrap>
-                {detail.map((str, i) => (
-                  <Detail key={i}>{str}</Detail>
-                ))}
-              </DetailWrap>
-            )}
-          </div>
-          <div>
-            <Title>{title}</Title>
+const Experience = () => {
+  const experiences = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.defaults({
+      trigger: ".experience",
+      start: "top 70%",
+    });
+
+    gsap.to(".experience__heading", {
+      scrollTrigger: {
+        toggleActions: "restart none none none",
+      },
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: "elastic.out(1, 0.8)",
+      stagger: 0.2,
+    });
+
+    experiences.current?.childNodes.forEach((_, i) => {
+      const target = ".experience__item" + i;
+      gsap.to(target, {
+        scrollTrigger: {
+          trigger: target,
+          toggleActions: "play none none none",
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.Out",
+      });
+    });
+  }, []);
+
+  return (
+    <ExperienceWrap className="experience">
+      <h2>
+        {"Experience.".split("").map((item, i) => (
+          <span key={i} className="experience__heading">
+            {item}
+          </span>
+        ))}
+      </h2>
+      <ul className="experience" ref={experiences}>
+        {data.experiences.map(({ duration, title, descriptions, detail }, i) => (
+          <li key={i} className={`experience__item${i}`}>
             <div>
-              {descriptions.map((desc, i) => (
-                <p key={i}>{desc}</p>
-              ))}
+              <Duration>{duration}</Duration>
+              {detail && (
+                <DetailWrap>
+                  {detail.map((str, i) => (
+                    <Detail key={i}>{str}</Detail>
+                  ))}
+                </DetailWrap>
+              )}
             </div>
-          </div>
-        </li>
-      ))}
-    </ul>
-  </ExperienceWrap>
-);
+            <div>
+              <Title>{title}</Title>
+              <div>
+                {descriptions.map((desc, i) => (
+                  <p key={i}>{desc}</p>
+                ))}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </ExperienceWrap>
+  );
+};
 
 export default Experience;
 
 const ExperienceWrap = styled.div`
+  h2 {
+    overflow: hidden;
+
+    span {
+      display: inline-block;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
   ul {
     margin-left: 172px;
   }
@@ -43,7 +98,23 @@ const ExperienceWrap = styled.div`
     display: flex;
     gap: 130px;
     margin-bottom: 40px;
-    font-size: ${({ theme }) => theme.fontSize.medium2};
+    font-size: calc(0.6rem + 0.5vw);
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  @media screen and (max-width: 980px) {
+    li {
+      gap: 60px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    li {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 60px;
+    }
   }
 `;
 
@@ -61,7 +132,7 @@ const Detail = styled.span`
 `;
 
 const Title = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.medium1};
+  font-size: calc(0.8rem + 0.5vw);
   font-weight: 700;
   margin-bottom: 15px;
 `;

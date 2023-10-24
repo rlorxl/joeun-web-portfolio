@@ -23,21 +23,11 @@ body::-webkit-scrollbar {
   background-color: #242424;
 }
 
-div,
-section,
-header,
-footer,
-p,
-h1,
-h2 {
-  box-sizing: border-box;
-}
-
 body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
   overflow-x: hidden;
-  color: #f8f8f8;
+  color: #f0f0f0;
   background-color: #242424;
   position: relative;
 
@@ -48,13 +38,24 @@ body {
   cursor: none;
 }
 
+div,
+section,
+header,
+footer,
+p,
+h1,
+h2 {
+  box-sizing: border-box;
+}
+
 ul,li {
   list-style: none;
 }
 
 a {
   text-decoration: none;
-  color: #f8f8f8;
+  color: #f0f0f0;
+  cursor: none;
 }
 
 h1, h2 {
