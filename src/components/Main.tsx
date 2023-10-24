@@ -3,10 +3,8 @@ import React, { useEffect, useRef } from "react";
 import { styled, keyframes } from "styled-components";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { gsap } from "gsap";
-import polygon1 from "../assets/polygon1.svg";
 
 const Main = () => {
-  const main = useRef<HTMLElement>(null);
   const p2 = useRef<HTMLParagraphElement>(null);
   const t1 = useRef<GSAPTimeline>();
   const t2 = useRef<GSAPTimeline>();
@@ -96,6 +94,7 @@ const Main = () => {
       ease: "none",
     });
   };
+
   useEffect(() => {
     typeAni1();
     typeAni2();
@@ -103,7 +102,7 @@ const Main = () => {
   }, []);
 
   return (
-    <MainWrap ref={main}>
+    <MainWrap>
       <GridBox>
         <Greeting>
           <Inner>
@@ -159,9 +158,7 @@ const Main = () => {
           <p className="p2" ref={p2}>
             Frontend Developer * Publisher&nbsp;
           </p>
-          <p className="p2" ref={p2}>
-            Frontend Developer * Publisher&nbsp;
-          </p>
+          <p className="p2">Frontend Developer * Publisher&nbsp;</p>
         </Paragragh2>
       </GridBox>
     </MainWrap>
@@ -306,7 +303,7 @@ const textclip = keyframes`
   100% { background-position: 200% center; }
 `;
 
-const Paragragh2 = styled.div<{ move?: number; forward?: boolean }>`
+const Paragragh2 = styled.div`
   height: 100%;
   grid-column: 4 / span 4;
   border-radius: 25%;
