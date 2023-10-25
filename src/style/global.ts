@@ -26,7 +26,7 @@ body::-webkit-scrollbar {
 body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   color: #f0f0f0;
   background-color: #111;
   position: relative;

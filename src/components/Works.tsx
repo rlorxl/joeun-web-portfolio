@@ -43,26 +43,11 @@ const Works = () => {
         resetText(true);
         t1.current?.restart(); // 기본값 ~ gsap.to에서 적용한 값이 재실행.
         t2.current?.restart();
-        // t2.current?.clear().fromTo(
-        //   ".bg-word2",
-        //   // { xPercent: 50 }, // 이전 동작에 의해 현재 위치가 (xPercent: -100)이므로 위치를 재조정 해줌.
-        //   { xPercent: 0 },
-        //   {
-        //     xPercent: -50,
-        //     duration: 1.2,
-        //     ease: "power3.Out",
-        //   }
-        // );
       },
       onLeave: () => {
         changeText();
         t1.current?.restart();
         t2.current?.restart();
-        // t2.current?.clear().to(".bg-word2", {
-        //   xPercent: -100,
-        //   duration: 1.2,
-        //   ease: "power3.Out",
-        // });
       },
     });
 
