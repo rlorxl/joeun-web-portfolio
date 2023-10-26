@@ -1,10 +1,12 @@
 /* eslint-disable object-shorthand */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { styled, keyframes } from "styled-components";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { gsap } from "gsap";
 
 const Main = () => {
+  const [moveWidth, setMoveWidth] = useState<number>(0);
+
   const p2 = useRef<HTMLParagraphElement>(null);
   const t1 = useRef<GSAPTimeline>();
   const t2 = useRef<GSAPTimeline>();
@@ -76,29 +78,37 @@ const Main = () => {
       });
   };
 
-  const marquee = () => {
-    if (!p2.current) return;
-    let rate = 100;
-    let distance = p2.current.clientWidth;
-    let style = window.getComputedStyle(p2.current);
-    let marginRight = Number(style.marginRight) || 20;
-    let totalDistance = distance + marginRight;
-    let time = totalDistance / rate;
+  // const marquee = () => {
+  //   if (!p2.current) return;
+  //   let rate = 100;
+  //   let distance = p2.current.clientWidth;
+  //   let style = window.getComputedStyle(p2.current);
+  //   let marginRight = Number(style.marginRight) || 20;
+  //   let totalDistance = distance + marginRight;
+  //   let time = totalDistance / rate;
 
-    if (!t2.current) return;
-    t2.current.play();
-    t2.current.to(".p2", {
-      duration: time,
-      repeat: -1,
-      x: -totalDistance,
-      ease: "none",
-    });
-  };
+  //   if (!t2.current) return;
+  //   t2.current.play();
+  //   t2.current.to(".p2", {
+  //     duration: time,
+  //     repeat: -1,
+  //     x: -totalDistance,
+  //     ease: "none",
+  //   });
+  // };
 
   useEffect(() => {
     typeAni1();
     typeAni2();
-    window.addEventListener("resize", marquee);
+
+    const setElementWidth = () => {
+      if (!p2.current) return;
+      let translateWidth = p2.current.clientWidth;
+      setMoveWidth(translateWidth);
+    };
+
+    setElementWidth();
+    window.addEventListener("resize", setElementWidth);
   }, []);
 
   return (
@@ -154,11 +164,13 @@ const Main = () => {
             </p>
           </div>
         </Paragragh1>
-        <Paragragh2>
+        <Paragragh2 movewidth={moveWidth + 50}>
           <p className="p2" ref={p2}>
-            Frontend Developer * Publisher&nbsp;
+            Frontend Developer * Publisher
           </p>
-          <p className="p2">Frontend Developer * Publisher&nbsp;</p>
+          <p className="p2" ref={p2}>
+            Frontend Developer * Publisher
+          </p>
         </Paragragh2>
       </GridBox>
     </MainWrap>
@@ -299,11 +311,14 @@ const Paragragh1 = styled.div`
   }
 `;
 
-const textclip = keyframes`
-  100% { background-position: 200% center; }
+const scroll = (movewidth: number) => keyframes`
+  100% {
+    transform: translate(-${movewidth}px);
+    background-position: 200% center; // text-clip
+  }
 `;
 
-const Paragragh2 = styled.div`
+const Paragragh2 = styled.div<{ movewidth: number }>`
   height: 100%;
   grid-column: 4 / span 4;
   border-radius: 25%;
@@ -312,13 +327,13 @@ const Paragragh2 = styled.div`
   display: flex;
 
   p {
-    margin-right: 20px;
+    margin-right: 50px;
     background: linear-gradient(90deg, rgba(29, 255, 142, 1) 0%, rgba(255, 242, 68, 1) 56%, rgba(255, 255, 255, 1) 89%);
     background-size: 200% auto;
     color: transparent;
     -moz-background-clip: text;
     -webkit-background-clip: text;
-    animation: ${textclip} 5s linear infinite;
+    animation: ${({ movewidth }) => scroll(movewidth)} ${({ movewidth }) => `${movewidth / 100}s`} linear 0s infinite;
   }
 
   @media screen and (max-width: 980px) {

@@ -195,6 +195,8 @@ const WorksWrap = styled.section`
   }
 
   @media screen and (max-width: 1600px) {
+    margin-bottom: 0;
+
     ul {
       grid-area: 1/1/-1/-1;
       padding: 10rem 5rem;

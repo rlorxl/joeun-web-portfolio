@@ -3,18 +3,17 @@ import { keyframes, styled } from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+const element = [
+  { id: "1", email: "imjoeun08@naver.com" },
+  { id: "2", email: "imjoeun08@naver.com" },
+  { id: "3", email: "imjoeun08@naver.com" },
+];
+
 const Contact = () => {
+  const [moveWidth, setMoveWidth] = useState<number>(0);
+
   const emailParent = useRef<HTMLParagraphElement>(null);
   const emailElement = useRef<HTMLSpanElement>(null);
-
-  const array = [
-    { id: "1", email: "imjoeun08@naver.com" },
-    { id: "2", email: "imjoeun08@naver.com" },
-    { id: "3", email: "imjoeun08@naver.com" },
-  ];
-
-  const [element, setElement] = useState(array);
-  const [moveWidth, setMoveWidth] = useState<number>(0);
 
   const t1 = useRef<GSAPTimeline>();
   t1.current = gsap.timeline({ paused: true });
@@ -54,16 +53,14 @@ const Contact = () => {
       },
     });
 
-    if (!emailElement.current) return;
-    let translateWidth = emailElement.current.clientWidth;
-    // console.log(translateWidth);
-    setMoveWidth(translateWidth);
-
-    window.addEventListener("resize", () => {
-      let translateWidth = emailElement.current!.clientWidth;
-      // console.log(translateWidth);
+    const setElementWidth = () => {
+      if (!emailElement.current) return;
+      let translateWidth = emailElement.current.clientWidth;
       setMoveWidth(translateWidth);
-    });
+    };
+
+    setElementWidth();
+    window.addEventListener("resize", setElementWidth);
   }, []);
 
   // useEffect(() => {
