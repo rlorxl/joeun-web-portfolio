@@ -179,6 +179,7 @@ const WorksWrap = styled.section`
 
   ul {
     grid-area: 1/2/-1/-2;
+    margin: 0 auto;
     padding-top: 10rem;
     z-index: 10;
   }
@@ -209,9 +210,31 @@ const WorksWrap = styled.section`
 
   @media screen and (max-width: 1080px) {
     li {
+      gap: 60px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    li {
       ${({ theme }) => theme.mixins.flexBox({ direction: "column", justify: "start", align: "flex-start" })};
       height: 800px;
       gap: 37px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    li {
+      height: 568px;
+    }
+
+    li:nth-child(2) {
+      margin-top: -147px;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    ul {
+      padding: 10rem 2rem 0;
     }
   }
 `;
@@ -230,6 +253,7 @@ const ImageBox = styled.div<{ imageid: string }>`
 
   div:nth-child(1) {
     width: 100%;
+    height: 100%;
     max-height: 300px;
 
     img {
@@ -276,8 +300,23 @@ const ImageBox = styled.div<{ imageid: string }>`
   }
 
   @media screen and (max-width: 1080px) {
-    flex-shrink: 0;
-    flex-basis: auto;
+    min-width: 0;
+
+    div:nth-child(2) span {
+      padding: 1px 16px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    div:nth-child(1) {
+      height: auto;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    div:nth-child(1) {
+      height: 100%;
+    }
   }
 `;
 
@@ -324,6 +363,13 @@ const DescBox = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 1080px) {
+    flex: 1 0 300px;
+    & > div {
+      font-size: calc(0.8rem + 0.5vw);
+    }
+  }
 `;
 
 const Button = styled.a`
@@ -337,4 +383,10 @@ const Button = styled.a`
   font-weight: 700;
   color: #222;
   text-transform: uppercase;
+
+  @media screen and (max-width: 425px) {
+    width: 150px;
+    height: 42px;
+    font-size: ${({ theme }) => theme.fontSize.base};
+  }
 `;

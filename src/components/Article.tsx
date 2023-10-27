@@ -179,4 +179,14 @@ const ArticleWrap = styled.section`
       margin-left: 0;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    padding: 0;
+    margin-bottom: 0;
+    font-size: calc(0.8rem + 0.5vw);
+
+    p {
+      line-height: 28px;
+    }
+  }
 `;

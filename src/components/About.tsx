@@ -120,6 +120,18 @@ const AboutWrap = styled.section`
   @media screen and (max-width: 1280px) {
     padding: 0 4rem;
   }
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+
+    /* div {
+      overflow-y: hidden;
+    } */
+  }
+
+  @media screen and (max-width: 425px) {
+    padding: 0 2rem;
+  }
 `;
 
 const Description = styled.div`
@@ -144,6 +156,16 @@ const Description = styled.div`
       width: 120px;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    margin-bottom: 15rem;
+  }
+
+  @media screen and (max-width: 425px) {
+    gap: 35px;
+    margin-bottom: 10rem;
+  }
 `;
 
 const Introduce = styled.div`
@@ -158,6 +180,14 @@ const Introduce = styled.div`
     margin-bottom: 2rem;
     transform: translateY(100%);
     opacity: 0;
+  }
+
+  @media screen and (max-width: 425px) {
+    p {
+      font-size: ${({ theme }) => theme.fontSize.base};
+      line-height: 32px;
+      margin-bottom: 1.5rem;
+    }
   }
 `;
 
@@ -182,6 +212,14 @@ const Skills = styled.div`
     border-radius: 80px;
     border: 2px solid ${({ theme }) => theme.color.borderColor};
   }
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 15rem;
+  }
+
+  @media screen and (max-width: 425px) {
+    margin-bottom: 10rem;
+  }
 `;
 
 const RoundPath = styled.div`
@@ -199,5 +237,11 @@ const RoundPath = styled.div`
     width: 60%;
     top: 3%;
     left: -45%;
+  }
+
+  @media screen and (max-width: 768px) {
+    top: 16%;
+    left: 64%;
+    opacity: 0.2;
   }
 `;

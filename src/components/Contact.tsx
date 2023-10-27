@@ -131,7 +131,7 @@ const Contact = () => {
 export default Contact;
 
 const ContactWrap = styled.section`
-  height: 100vh;
+  /* height: 100vh; */
   ${({ theme }) => theme.mixins.flexBox({ direction: "column" })}
   text-align: center;
 

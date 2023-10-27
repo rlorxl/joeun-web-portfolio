@@ -1,8 +1,10 @@
 import { gsap } from "gsap";
-import React, { useEffect } from "react";
-import { styled } from "styled-components";
+import React, { useEffect, useState } from "react";
+import { css, keyframes, styled } from "styled-components";
 
 const Navigation = () => {
+  const [menuClicked, setMenuClicked] = useState<boolean>(false);
+
   useEffect(() => {
     gsap.to(".heading", {
       delay: 0.5,
@@ -22,7 +24,7 @@ const Navigation = () => {
   }, []);
 
   return (
-    <NavigationWrap>
+    <NavigationWrap clicked={menuClicked.toString()}>
       <h1 className="heading">Joeun lee web portfolio</h1>
       <ul>
         <li className="nav">
@@ -35,13 +37,19 @@ const Navigation = () => {
           <a href="#contact">Contact</a>
         </li>
       </ul>
+      <Menu onClick={() => setMenuClicked(!menuClicked)} clicked={menuClicked.toString()}>
+        <span />
+        <span />
+        <span />
+        <span />
+      </Menu>
     </NavigationWrap>
   );
 };
 
 export default Navigation;
 
-const NavigationWrap = styled.div`
+const NavigationWrap = styled.div<{ clicked: string }>`
   ${({ theme }) => theme.mixins.flexBox({ justify: "space-between" })}
   width: 100%;
   height: 100px;
@@ -50,7 +58,6 @@ const NavigationWrap = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  /* background: linear-gradient(180deg, rgba(36, 36, 36, 1) 0%, rgba(36, 36, 36, 1) 30%, rgba(255, 255, 255, 0) 100%); */
 
   h1 {
     font-size: ${({ theme }) => theme.fontSize.medium1};
@@ -83,5 +90,134 @@ const NavigationWrap = styled.div`
     height: 100%;
     color: ${({ theme }) => theme.color.white};
     ${({ theme }) => theme.mixins.flexBox()};
+  }
+
+  @media screen and (max-width: 768px) {
+    align-items: flex-start;
+
+    ul {
+      display: none;
+    }
+
+    ${({ clicked }) =>
+      clicked === "true" &&
+      css`
+        ul {
+          display: block;
+          position: absolute;
+          top: 78%;
+          right: 6%;
+        }
+
+        li {
+          margin-right: 0;
+          margin-bottom: 12px;
+          opacity: 0;
+          background: #111;
+
+          &:nth-child(1) {
+            animation: ${down} 0.5s cubic-bezier(0, 0.46, 0.32, 1.28) forwards;
+          }
+          &:nth-child(2) {
+            animation: ${down1} 0.6s cubic-bezier(0, 0.46, 0.32, 1.28) 0.05s forwards;
+          }
+          &:nth-child(3) {
+            animation: ${down2} 0.7s cubic-bezier(0, 0.46, 0.32, 1.28) 0.1s forwards;
+          }
+        }
+      `};
+  }
+
+  @media screen and (max-width: 425px) {
+    h1 {
+      font-size: ${({ theme }) => theme.fontSize.medium2};
+    }
+  }
+`;
+
+const down = keyframes`
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const down1 = keyframes`
+  0% {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const down2 = keyframes`
+  0% {
+    transform: translateY(-300%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const Menu = styled.div<{ clicked: string }>`
+  width: 30px;
+  height: 25px;
+  position: relative;
+  display: none;
+
+  span {
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 4px;
+    transition: all 0.1s ease-in-out;
+    position: absolute;
+    left: 0;
+
+    &:nth-child(1) {
+      top: 0;
+    }
+    &:nth-child(2),
+    &:nth-child(3) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &:nth-child(4) {
+      bottom: 0;
+    }
+  }
+
+  ${({ clicked }) =>
+    clicked === "true" &&
+    css`
+      span:nth-child(1) {
+        transform: translateY(8px);
+        opacity: 0;
+      }
+      span:nth-child(2) {
+        transform: rotate(45deg);
+        transform-origin: center;
+      }
+      span:nth-child(3) {
+        transform: rotate(-45deg);
+        transform-origin: center;
+      }
+      span:nth-child(4) {
+        transform: translateY(-8px);
+        opacity: 0;
+      }
+    `}
+
+  @media screen and (max-width: 768px) {
+    display: block;
   }
 `;

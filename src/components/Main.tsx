@@ -199,6 +199,10 @@ const MainWrap = styled.section`
   @media screen and (max-width: 768px) {
     padding: 0 5rem;
   }
+
+  @media screen and (max-width: 425px) {
+    padding: 0 3rem;
+  }
 `;
 
 const GridBox = styled.div`
@@ -209,6 +213,10 @@ const GridBox = styled.div`
   grid-template-rows: repeat(3, minmax(200px, auto));
   align-items: center;
   position: relative;
+
+  @media screen and (max-width: 425px) {
+    grid-template-rows: repeat(3, minmax(110px, auto));
+  }
 `;
 
 const Greeting = styled.div`
@@ -307,6 +315,14 @@ const Paragragh1 = styled.div`
       margin-left: 0;
       height: 80%;
       padding: 0 calc(8rem + 2.5vw);
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    height: 60%;
+
+    div {
+      padding: 0 calc(5rem + 2.5vw);
     }
   }
 `;
