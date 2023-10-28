@@ -25,7 +25,6 @@ const Navigation = () => {
 
   return (
     <NavigationWrap clicked={menuClicked.toString()}>
-      <h1 className="heading">Joeun lee web portfolio</h1>
       <ul>
         <li className="nav">
           <a href="#about">About</a>
@@ -50,11 +49,11 @@ const Navigation = () => {
 export default Navigation;
 
 const NavigationWrap = styled.div<{ clicked: string }>`
-  ${({ theme }) => theme.mixins.flexBox({ justify: "space-between" })}
+  ${({ theme }) => theme.mixins.flexBox({ justify: "flex-end" })}
   width: 100%;
   height: 100px;
   padding: 2rem 3rem;
-  color: #fff;
+  color: ${({ theme }) => theme.color.fontColor};
   position: sticky;
   top: 0;
   z-index: 100;
@@ -63,6 +62,7 @@ const NavigationWrap = styled.div<{ clicked: string }>`
     font-size: ${({ theme }) => theme.fontSize.medium1};
     text-transform: uppercase;
     font-weight: 500;
+    color: ${({ theme }) => theme.color.white};
     opacity: 0;
     transform: translateY(-80%);
   }
@@ -75,10 +75,21 @@ const NavigationWrap = styled.div<{ clicked: string }>`
     width: 100px;
     height: 50px;
     border-radius: 25px;
-    border: 1px solid ${({ theme }) => theme.color.white};
+    border: 2px solid #f0f0f0;
     margin-right: 8px;
     opacity: 0;
     transform: translateY(-80%);
+    transition: all 0.2s ease;
+    background: #111;
+
+    &:hover {
+      border-color: ${({ theme }) => theme.color.appColor};
+      background: ${({ theme }) => theme.color.appColor};
+
+      a {
+        color: ${({ theme }) => theme.color.black};
+      }
+    }
   }
 
   li:nth-child(3) {
@@ -88,8 +99,8 @@ const NavigationWrap = styled.div<{ clicked: string }>`
   a {
     width: 100%;
     height: 100%;
-    color: ${({ theme }) => theme.color.white};
     ${({ theme }) => theme.mixins.flexBox()};
+    color: ${({ theme }) => theme.color.white};
   }
 
   @media screen and (max-width: 768px) {

@@ -113,13 +113,14 @@ const About = () => {
 export default About;
 
 const AboutWrap = styled.section`
-  margin: 12rem auto;
-  max-width: 1080px;
+  margin: 0 auto;
+  padding: 12rem 22rem;
+  background: #fdf6e1;
   position: relative;
   overflow-x: hidden;
 
   @media screen and (max-width: 1280px) {
-    padding: 0 4rem;
+    padding: 12rem 4rem;
   }
 
   @media screen and (max-width: 768px) {
@@ -127,7 +128,7 @@ const AboutWrap = styled.section`
   }
 
   @media screen and (max-width: 425px) {
-    padding: 0 2rem;
+    padding: 6rem 2rem 0;
   }
 `;
 
@@ -199,7 +200,7 @@ const Skills = styled.div`
 
   & > div {
     font-size: ${({ theme }) => theme.fontSize.large};
-    color: ${({ theme }) => theme.color.white};
+    color: ${({ theme }) => theme.color.black};
     position: relative;
   }
 
@@ -207,7 +208,7 @@ const Skills = styled.div`
     display: block;
     padding: 10px 24px;
     border-radius: 80px;
-    border: 2px solid ${({ theme }) => theme.color.borderColor};
+    border: 2px solid ${({ theme }) => theme.color.fontColor};
   }
 
   @media screen and (max-width: 768px) {
@@ -220,10 +221,10 @@ const Skills = styled.div`
 `;
 
 const RoundPath = styled.div`
-  width: 70%;
+  width: 50%;
   position: absolute;
   top: 5%;
-  left: -70%;
+  left: -30%;
 
   img {
     width: 100%;
@@ -232,7 +233,7 @@ const RoundPath = styled.div`
 
   @media screen and (max-width: 1280px) {
     width: 60%;
-    top: 3%;
+    top: 8%;
     left: -45%;
   }
 

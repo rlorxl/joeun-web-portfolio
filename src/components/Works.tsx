@@ -87,17 +87,17 @@ const Works = () => {
 
   return (
     <WorksWrap>
-      <h1 id="works" className="works">
+      <h2 id="works" className="works">
         Works.
-      </h1>
-      <h2>
+      </h2>
+      <h3>
         <span className="bg-word1" ref={bgWord1}>
           frontend
         </span>
         <span className="bg-word2" ref={bgWord2}>
           works
         </span>
-      </h2>
+      </h3>
       <ul>
         {Data.projects.map(({ id, name, date, src, stack, description, link, portfolioLink, githubLink }, i) => (
           <li key={i} id={id} className={id}>
@@ -147,17 +147,20 @@ const WorksWrap = styled.section`
   position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10%, auto));
-  margin-bottom: 12rem;
+  padding-bottom: 12rem;
+  background: #111;
 
-  h1 {
+  h2 {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    color: ${({ theme }) => theme.color.appColor};
+    padding: 7rem 0;
+    color: ${({ theme }) => theme.color.white};
+    z-index: 100;
   }
 
-  h2 {
+  h3 {
     grid-area: 1/1/-1/-1;
     width: 100%;
     height: 100vh;
@@ -181,7 +184,7 @@ const WorksWrap = styled.section`
   ul {
     grid-area: 1/2/-1/-2;
     margin: 0 auto;
-    padding-top: 10rem;
+    padding-top: 20rem;
     z-index: 10;
   }
 
@@ -197,11 +200,11 @@ const WorksWrap = styled.section`
   }
 
   @media screen and (max-width: 1600px) {
-    margin-bottom: 0;
+    padding-bottom: 0;
 
     ul {
       grid-area: 1/1/-1/-1;
-      padding: 10rem 5rem;
+      padding: 20rem 5rem 10rem;
     }
 
     li {
@@ -326,6 +329,7 @@ const DescBox = styled.div`
 
   & > p {
     margin-bottom: 30px;
+    color: ${({ theme }) => theme.color.white};
 
     span:nth-child(1) {
       font-size: ${({ theme }) => theme.fontSize.large};
@@ -378,7 +382,7 @@ const Button = styled.a`
   height: 64px;
   ${({ theme }) => theme.mixins.flexBox()};
   border-radius: 45px;
-  background-color: #fff;
+  background: ${({ theme }) => theme.color.appColor};
   margin-top: 30px;
   font-size: ${({ theme }) => theme.fontSize.medium2};
   font-weight: 700;

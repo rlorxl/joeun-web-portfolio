@@ -186,6 +186,7 @@ const MainWrap = styled.section`
   font-family: "Montserrat", sans-serif;
   font-size: calc(1rem + 4.5vw);
   font-weight: 600;
+  border-bottom: 2px solid #111;
   position: relative;
 
   p {

@@ -1,3 +1,4 @@
+import { styled } from "styled-components";
 import About from "./components/About.tsx";
 import Main from "./components/Main.tsx";
 import Navigation from "./components/Navigation.tsx";
@@ -11,9 +12,10 @@ function App() {
   const [mousemoveHandler] = useMouse();
 
   return (
-    <div onMouseMove={mousemoveHandler}>
+    <div onMouseMove={mousemoveHandler} style={{ position: "relative" }}>
       <Cursor />
       <Navigation />
+      <Logo className="heading">Joeun lee web portfolio</Logo>
       <main className="main">
         <Main />
         <About />
@@ -26,3 +28,16 @@ function App() {
 }
 
 export default App;
+
+const Logo = styled.h1`
+  color: ${({ theme }) => theme.color.white};
+  text-transform: uppercase;
+  position: absolute;
+  top: 25px;
+  left: 35px;
+  font-weight: 400;
+
+  @media screen and (max-width: 425px) {
+    font-size: ${({ theme }) => theme.fontSize.medium2};
+  }
+`;

@@ -20,18 +20,18 @@ const Contact = () => {
 
   const changeBgColor = () => {
     gsap.to(".main", {
-      backgroundColor: "#1dff8e",
+      background: "#CCF036",
     });
-    gsap.to([".contact", ".contact a"], {
+    gsap.to([".contact", ".contact__heading", ".contact a"], {
       color: "#222",
     });
   };
 
   const resetBgColor = () => {
     gsap.to(".main", {
-      backgroundColor: "#111",
+      background: "#111",
     });
-    gsap.to([".contact", ".contact a"], {
+    gsap.to([".contact", ".contact__heading", ".contact a"], {
       color: "#f0f0f0",
     });
   };
@@ -131,9 +131,14 @@ const Contact = () => {
 export default Contact;
 
 const ContactWrap = styled.section`
-  /* height: 100vh; */
   ${({ theme }) => theme.mixins.flexBox({ direction: "column" })}
   text-align: center;
+  padding-top: 12rem;
+  color: ${({ theme }) => theme.color.white};
+
+  h2 {
+    color: ${({ theme }) => theme.color.white};
+  }
 
   div > p {
     margin-top: 16px;
@@ -143,6 +148,10 @@ const ContactWrap = styled.section`
   svg {
     cursor: pointer;
     margin-top: 32px;
+  }
+
+  @media screen and (max-width: 1080px) {
+    padding-top: 6rem;
   }
 `;
 
@@ -157,7 +166,7 @@ const Email = styled.p<{ movewidth: number }>`
   overflow: hidden;
   font-size: calc(2.5rem + 6vw);
   font-weight: 700;
-  /* text-transform: uppercase; */
+  text-transform: uppercase;
   padding: 15rem 0 8rem 0;
   ${({ theme }) => theme.mixins.flexBox()};
 
@@ -169,6 +178,6 @@ const Email = styled.p<{ movewidth: number }>`
 
 const CopyRight = styled.p`
   font-size: ${({ theme }) => theme.fontSize.small};
-  color: #666;
   margin: 150px 0 30px 0;
+  opacity: 0.5;
 `;

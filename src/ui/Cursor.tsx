@@ -44,7 +44,7 @@ const CursorStyle = styled.div<{ enter: string }>`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: ${({ theme }) => theme.color.appColor};
+        background: ${({ theme }) => theme.color.black};
         color: transparent;
         -moz-background-clip: text;
         -webkit-background-clip: text;

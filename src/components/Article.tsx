@@ -70,13 +70,15 @@ const Article = () => {
 export default Article;
 
 const ArticleWrap = styled.section`
-  padding: 0 12rem;
+  padding: 12rem;
   ${({ theme }) => theme.mixins.flexBox({ justify: "space-between", align: "flex-start" })};
   font-size: ${({ theme }) => theme.fontSize.medium2};
   gap: 200px;
-  margin-bottom: 12rem;
+  background: #111;
+  color: ${({ theme }) => theme.color.white};
 
   h2 {
+    color: ${({ theme }) => theme.color.white};
     margin-bottom: 67px;
     overflow: hidden;
 
@@ -105,7 +107,6 @@ const ArticleWrap = styled.section`
   li {
     width: 100%;
     height: 80px;
-    /* font-size: ${({ theme }) => theme.fontSize.medium1}; */
     font-size: calc(0.8rem + 0.5vw);
     padding-top: 16px;
     overflow: hidden;
@@ -113,14 +114,14 @@ const ArticleWrap = styled.section`
     &:hover {
       a {
         background: ${({ theme }) => theme.color.appColor};
-        border-color: ${({ theme }) => theme.color.fontColor};
+        border-color: ${({ theme }) => theme.color.appColor};
       }
 
       img {
         transform: translate(20px);
       }
       a {
-        color: ${({ theme }) => theme.color.fontColor};
+        color: ${({ theme }) => theme.color.black};
       }
     }
 
@@ -155,7 +156,7 @@ const ArticleWrap = styled.section`
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    height: 654px;
+    height: 900px;
 
     div {
       order: 0;
@@ -173,7 +174,9 @@ const ArticleWrap = styled.section`
   }
 
   @media screen and (max-width: 1080px) {
+    height: 712px;
     padding: 0 7rem;
+    margin-bottom: 0;
 
     h2 {
       margin-left: 0;
