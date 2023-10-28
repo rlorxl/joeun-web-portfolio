@@ -80,6 +80,8 @@ const Experience = () => {
 export default Experience;
 
 const ExperienceWrap = styled.div`
+  margin-bottom: 10rem;
+
   h2 {
     overflow: hidden;
 
@@ -98,7 +100,7 @@ const ExperienceWrap = styled.div`
     display: flex;
     gap: 130px;
     margin-bottom: 40px;
-    font-size: calc(0.6rem + 0.5vw);
+    font-size: calc(0.8rem + 0.5vw);
     transform: translateY(100%);
     opacity: 0;
   }
@@ -114,6 +116,16 @@ const ExperienceWrap = styled.div`
       flex-direction: column;
       gap: 10px;
       margin-bottom: 60px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    ul {
+      margin: 0;
+    }
+
+    h2 {
+      margin-bottom: 35px;
     }
   }
 `;

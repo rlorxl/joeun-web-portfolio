@@ -20,22 +20,27 @@ html {
 *::-webkit-scrollbar, 
 html::-webkit-scrollbar, 
 body::-webkit-scrollbar {
-  background-color: #242424;
+  background-color: #111;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
-  overflow-x: hidden;
-  color: #f0f0f0;
-  background-color: #242424;
+  color: #111;
+  background-color: #111;
   position: relative;
+  overflow-x: hidden;
+  
 
   -webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select:none;
   user-select:none;
   cursor: none;
+}
+
+section {
+  position: relative;
 }
 
 div,
@@ -59,13 +64,12 @@ a {
 }
 
 h1, h2 {
-  text-transform: uppercase;
   font-weight: 700;
 }
 
 h2 {
-  color: ${({ theme }) => theme.color.appColor};
-  font-size: ${({ theme }) => theme.fontSize.medium1};
+  color: ${({ theme }) => theme.color.black};
+  font-size: ${({ theme }) => theme.fontSize.large};
 }
 `;
 
@@ -75,9 +79,10 @@ const global = {
 };
 
 const color = {
-  appColor: "#1dff8e",
-  fontColor: "#222",
+  appColor: "#CCF036",
+  fontColor: "#4C4C4C",
   white: "#f8f8f8",
+  black: "#222",
   borderColor: "#A4A2A2",
 };
 

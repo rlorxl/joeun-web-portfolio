@@ -23,7 +23,7 @@ const CursorStyle = styled.div<{ enter: string }>`
   margin-left: -20px;
   margin-top: -20px;
   opacity: 0.5;
-  transition: transform 0.4s ease;
+  transition: scale 0.2s ease-out;
   z-index: 999;
   pointer-events: none; // * 마우스 이벤트가 적용되지 않게 하는 속성
   mix-blend-mode: difference;
@@ -32,11 +32,11 @@ const CursorStyle = styled.div<{ enter: string }>`
     enter === "true" &&
     css`
       scale: 3.5;
-      opacity: 0.9;
-      font-size: 6px;
+      background: #fff;
+      opacity: 1;
+      font-size: 4px;
       text-transform: uppercase;
       white-space: nowrap;
-      mix-blend-mode: normal;
 
       &::after {
         content: "view site";
@@ -44,6 +44,10 @@ const CursorStyle = styled.div<{ enter: string }>`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        background: ${({ theme }) => theme.color.black};
+        color: transparent;
+        -moz-background-clip: text;
+        -webkit-background-clip: text;
       }
     `}
 `;

@@ -1,41 +1,38 @@
-import React, { useEffect, useRef } from "react";
-import { styled } from "styled-components";
+import React, { useEffect, useRef, useState } from "react";
+import { keyframes, styled } from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+const element = [
+  { id: "1", email: "imjoeun08@naver.com" },
+  { id: "2", email: "imjoeun08@naver.com" },
+  { id: "3", email: "imjoeun08@naver.com" },
+];
+
 const Contact = () => {
-  const emailRef = useRef<HTMLSpanElement>(null);
+  const [moveWidth, setMoveWidth] = useState<number>(0);
+
+  const emailParent = useRef<HTMLParagraphElement>(null);
+  const emailElement = useRef<HTMLSpanElement>(null);
+
   const t1 = useRef<GSAPTimeline>();
-  t1.current = gsap.timeline({ paused: true, repeat: -1 });
+  t1.current = gsap.timeline({ paused: true });
 
   const changeBgColor = () => {
     gsap.to(".main", {
-      background: "#1dff8e",
+      background: "#CCF036",
+    });
+    gsap.to([".contact", ".contact__heading", ".contact a"], {
       color: "#222",
     });
   };
 
   const resetBgColor = () => {
     gsap.to(".main", {
-      background: "#242424",
-      color: "#f0f0f0",
+      background: "#111",
     });
-  };
-
-  const marquee = () => {
-    if (!emailRef.current) return;
-    let rate = 150;
-    let distance = emailRef.current.clientWidth;
-    let style = window.getComputedStyle(emailRef.current);
-    let marginRight = Number(style.marginRight) || 80;
-    let totalDistance = distance + marginRight;
-    let time = totalDistance / rate;
-
-    if (!t1.current) return;
-    t1.current.to(".email", {
-      duration: time,
-      x: -totalDistance,
-      ease: "none",
+    gsap.to([".contact", ".contact__heading", ".contact a"], {
+      color: "#f0f0f0",
     });
   };
 
@@ -45,33 +42,71 @@ const Contact = () => {
     gsap.to(".main", {
       scrollTrigger: {
         trigger: ".contact",
-        start: "top center",
+        start: "top 30%",
         toggleActions: "restart none none none",
         onEnter: () => {
           changeBgColor();
-          if (!t1.current) return;
-          t1.current.resume();
         },
         onLeaveBack: () => {
           resetBgColor();
-          if (!t1.current) return;
-          t1.current.pause();
         },
       },
     });
 
-    marquee();
+    const setElementWidth = () => {
+      if (!emailElement.current) return;
+      let translateWidth = emailElement.current.clientWidth;
+      setMoveWidth(translateWidth);
+    };
+
+    setElementWidth();
+    window.addEventListener("resize", setElementWidth);
   }, []);
+
+  // useEffect(() => {
+  //   console.log("실행");
+
+  //   if (!emailElement.current) return;
+  //   let translateWidth = emailElement.current.clientWidth;
+  //   console.log(translateWidth);
+
+  //   const targetIndex = element.length % 2 === 0 ? element.length / 2 : element.length % 2;
+  //   if (!emailParent.current) return;
+  //   const parentEl = [...emailParent.current.children];
+  //   const target = parentEl[targetIndex];
+
+  //   let interval = setInterval(() => {
+  //     if (!target) return;
+  //     x.current = Math.floor(target.getBoundingClientRect().left);
+  //     console.log(x.current + translateWidth);
+
+  //     if (x.current + translateWidth < 100) {
+  //       stop();
+
+  //       let newList = [...element];
+  //       let obj = { id: newList.length + 1 + "", email: "imjoeun08@naver.com" };
+  //       newList.push(obj);
+  //       setElement(newList);
+  //     }
+  //   }, 1000);
+
+  //   const stop = () => {
+  //     console.log("stopped");
+  //     clearInterval(interval);
+  //   };
+  // }, [element]);
+
   return (
     <ContactWrap className="contact">
       <h2 id="contact" className="contact__heading">
         Contact
       </h2>
-      <Email>
-        <span className="email" ref={emailRef}>
-          imjoeun08@naver.com
-        </span>
-        <span className="email">imjoeun08@naver.com&nbsp;&nbsp;imjoeun08@naver.com</span>
+      <Email ref={emailParent} movewidth={moveWidth + 100}>
+        {element.map(({ id, email }) => (
+          <span className={`email email${id}`} key={id} ref={emailElement}>
+            {email}
+          </span>
+        ))}
       </Email>
       <div>
         <p>imjoeun08@naver.com</p>
@@ -96,9 +131,14 @@ const Contact = () => {
 export default Contact;
 
 const ContactWrap = styled.section`
-  height: 100vh;
   ${({ theme }) => theme.mixins.flexBox({ direction: "column" })}
   text-align: center;
+  padding-top: 12rem;
+  color: ${({ theme }) => theme.color.white};
+
+  h2 {
+    color: ${({ theme }) => theme.color.white};
+  }
 
   div > p {
     margin-top: 16px;
@@ -110,27 +150,34 @@ const ContactWrap = styled.section`
     margin-top: 32px;
   }
 
-  a {
-    color: #222;
+  @media screen and (max-width: 1080px) {
+    padding-top: 6rem;
   }
 `;
 
-const Email = styled.p`
+const scroll = (movewidth: number) => keyframes`
+  100% {
+    transform: translate(-${movewidth}px);
+  }
+`;
+
+const Email = styled.p<{ movewidth: number }>`
   width: 100vw;
   overflow: hidden;
   font-size: calc(2.5rem + 6vw);
   font-weight: 700;
-  /* text-transform: uppercase; */
+  text-transform: uppercase;
   padding: 15rem 0 8rem 0;
   ${({ theme }) => theme.mixins.flexBox()};
 
-  /* span {
+  span {
     margin-right: 100px;
-  } */
+    animation: ${({ movewidth }) => scroll(movewidth)} ${({ movewidth }) => `${movewidth / 100}s`} linear 0s infinite;
+  }
 `;
 
 const CopyRight = styled.p`
   font-size: ${({ theme }) => theme.fontSize.small};
-  color: #666;
   margin: 150px 0 30px 0;
+  opacity: 0.5;
 `;

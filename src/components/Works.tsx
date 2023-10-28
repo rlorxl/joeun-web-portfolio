@@ -37,31 +37,30 @@ const Works = () => {
       trigger: ".project1",
       start: "top center",
       end: "+=1800px",
+      toggleActions: "restart none none none",
       onEnter: enter,
       onEnterBack: () => {
         resetText(true);
-        t1.current?.restart();
-        t2.current?.clear().fromTo(
-          ".bg-word2",
-          { xPercent: 50 }, // 이전 동작에 의해 현재 위치가 (xPercent: -100)이므로 위치를 재조정 해줌.
-          {
-            xPercent: -50,
-            duration: 1.2,
-            ease: "power3.Out",
-          }
-        );
+        t1.current?.restart(); // 기본값 ~ gsap.to에서 적용한 값이 재실행.
+        t2.current?.restart();
       },
       onLeave: () => {
         changeText();
         t1.current?.restart();
         t2.current?.restart();
-        t2.current?.to(".bg-word2", {
-          xPercent: -100,
-          duration: 1.2,
-          ease: "power3.Out",
-        });
       },
     });
+
+    /*
+      - bg-word1은 translate(-50%), bg-word2는 translate(50%)가 기본값임.
+      - 음수값은 xPercent를 적용했을 때 값을 overwrite하는 의미이지만 양수값은 기본값에서 시작해 몇%만큼 이동할건지를 보는거 같음. 
+        때문에 xPercent: 0 일때 0만큼 이동하고, xPercent: -50을 해야 -50%만큼 다시 이동하면서 제자리로 오는것 같음. 
+        (%값의 특성상 원래 이게 맞는 논리긴 함. 기본이 음수%일때 xPercent가 덮어써지는게 오히려 이상함.)
+      - 그럼 그냥 x: 0은 왜 적용되나??
+        - x: 100, y: 100은 적용하려는 값이 덮어써짐.
+        - 글자가 올라오는 애니메이션 효과를 줄 때 기본값을 translate(0,100%)로 하고 y: 0을 주면 글자가 0만큼 올라오는게 아니라 포지션값이 바뀜. (포지션이 변하는 것처럼 보이지만 css는 translate가 변경됨.)
+      - 그러니까.. x: 0을 적용하는게 이상한게 아니라 translate(-50%)에 xPercent: 0 (translate(0px))을 지정했을 때 위치가 제자리로 오는 이유가 궁금함. 
+    */
 
     t1.current = gsap
       .timeline({
@@ -80,7 +79,7 @@ const Works = () => {
         scrollTrigger: scroll,
       })
       .to(".bg-word2", {
-        xPercent: -50,
+        x: 0,
         duration: 1.2,
         ease: "power3.Out",
       });
@@ -88,17 +87,17 @@ const Works = () => {
 
   return (
     <WorksWrap>
-      <h1 id="works" className="works">
+      <h2 id="works" className="works">
         Works.
-      </h1>
-      <h2>
+      </h2>
+      <h3>
         <span className="bg-word1" ref={bgWord1}>
           frontend
         </span>
         <span className="bg-word2" ref={bgWord2}>
           works
         </span>
-      </h2>
+      </h3>
       <ul>
         {Data.projects.map(({ id, name, date, src, stack, description, link, portfolioLink, githubLink }, i) => (
           <li key={i} id={id} className={id}>
@@ -148,27 +147,29 @@ const WorksWrap = styled.section`
   position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10%, auto));
-  margin-bottom: 12rem;
+  padding-bottom: 12rem;
+  background: #111;
 
-  h1 {
+  h2 {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    color: ${({ theme }) => theme.color.appColor};
+    padding: 7rem 0;
+    color: ${({ theme }) => theme.color.white};
+    z-index: 100;
   }
 
-  h2 {
+  h3 {
     grid-area: 1/1/-1/-1;
     width: 100%;
     height: 100vh;
     font-size: calc(1.2rem + 10vw);
-    color: ${({ theme }) => theme.color.white};
-    opacity: 10%;
+    color: #353535;
     ${({ theme }) => theme.mixins.flexBox({ align: "start", justify: "space-between" })}
     position: sticky;
     top: 0;
-    z-index: -1;
+    overflow-x: hidden;
 
     span:nth-child(1) {
       transform: translate(-50%);
@@ -182,7 +183,9 @@ const WorksWrap = styled.section`
 
   ul {
     grid-area: 1/2/-1/-2;
-    padding-top: 10rem;
+    margin: 0 auto;
+    padding-top: 20rem;
+    z-index: 10;
   }
 
   li {
@@ -197,9 +200,11 @@ const WorksWrap = styled.section`
   }
 
   @media screen and (max-width: 1600px) {
+    padding-bottom: 0;
+
     ul {
       grid-area: 1/1/-1/-1;
-      padding: 10rem 5rem;
+      padding: 20rem 5rem 10rem;
     }
 
     li {
@@ -209,9 +214,31 @@ const WorksWrap = styled.section`
 
   @media screen and (max-width: 1080px) {
     li {
+      gap: 60px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    li {
       ${({ theme }) => theme.mixins.flexBox({ direction: "column", justify: "start", align: "flex-start" })};
       height: 800px;
       gap: 37px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    li {
+      height: 568px;
+    }
+
+    li:nth-child(2) {
+      margin-top: -147px;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    ul {
+      padding: 10rem 2rem 0;
     }
   }
 `;
@@ -230,6 +257,7 @@ const ImageBox = styled.div<{ imageid: string }>`
 
   div:nth-child(1) {
     width: 100%;
+    height: 100%;
     max-height: 300px;
 
     img {
@@ -276,8 +304,23 @@ const ImageBox = styled.div<{ imageid: string }>`
   }
 
   @media screen and (max-width: 1080px) {
-    flex-shrink: 0;
-    flex-basis: auto;
+    min-width: 0;
+
+    div:nth-child(2) span {
+      padding: 1px 16px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    div:nth-child(1) {
+      height: auto;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    div:nth-child(1) {
+      height: 100%;
+    }
   }
 `;
 
@@ -286,6 +329,7 @@ const DescBox = styled.div`
 
   & > p {
     margin-bottom: 30px;
+    color: ${({ theme }) => theme.color.white};
 
     span:nth-child(1) {
       font-size: ${({ theme }) => theme.fontSize.large};
@@ -324,6 +368,13 @@ const DescBox = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 1080px) {
+    flex: 1 0 300px;
+    & > div {
+      font-size: calc(0.8rem + 0.5vw);
+    }
+  }
 `;
 
 const Button = styled.a`
@@ -331,10 +382,16 @@ const Button = styled.a`
   height: 64px;
   ${({ theme }) => theme.mixins.flexBox()};
   border-radius: 45px;
-  background-color: #fff;
+  background: ${({ theme }) => theme.color.appColor};
   margin-top: 30px;
   font-size: ${({ theme }) => theme.fontSize.medium2};
   font-weight: 700;
   color: #222;
   text-transform: uppercase;
+
+  @media screen and (max-width: 425px) {
+    width: 150px;
+    height: 42px;
+    font-size: ${({ theme }) => theme.fontSize.base};
+  }
 `;
