@@ -116,6 +116,7 @@ const AboutWrap = styled.section`
   margin: 12rem auto;
   max-width: 1080px;
   position: relative;
+  overflow-x: hidden;
 
   @media screen and (max-width: 1280px) {
     padding: 0 4rem;
@@ -123,10 +124,6 @@ const AboutWrap = styled.section`
 
   @media screen and (max-width: 768px) {
     margin: 0;
-
-    /* div {
-      overflow-y: hidden;
-    } */
   }
 
   @media screen and (max-width: 425px) {

@@ -166,6 +166,7 @@ const WorksWrap = styled.section`
     ${({ theme }) => theme.mixins.flexBox({ align: "start", justify: "space-between" })}
     position: sticky;
     top: 0;
+    overflow-x: hidden;
 
     span:nth-child(1) {
       transform: translate(-50%);

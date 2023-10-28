@@ -29,6 +29,8 @@ body {
   color: #f0f0f0;
   background-color: #111;
   position: relative;
+  overflow-x: hidden;
+  
 
   -webkit-user-select:none;
   -moz-user-select:none;
@@ -39,7 +41,7 @@ body {
 
 section {
   position: relative;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 div,
