@@ -27,10 +27,9 @@ body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
   color: #111;
-  background-color: #111;
+  background: #111;
   position: relative;
   overflow-x: hidden;
-  
 
   -webkit-user-select:none;
   -moz-user-select:none;

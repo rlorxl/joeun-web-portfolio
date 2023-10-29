@@ -74,7 +74,6 @@ const ArticleWrap = styled.section`
   ${({ theme }) => theme.mixins.flexBox({ justify: "space-between", align: "flex-start" })};
   font-size: ${({ theme }) => theme.fontSize.medium2};
   gap: 200px;
-  background: #111;
   color: ${({ theme }) => theme.color.white};
 
   h2 {

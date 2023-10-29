@@ -231,7 +231,7 @@ const WorksWrap = styled.section`
 
   @media screen and (max-width: 425px) {
     ul {
-      padding: 10rem 2rem 0;
+      padding: 16rem 2rem 0;
     }
   }
 `;
