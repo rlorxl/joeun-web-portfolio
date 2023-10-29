@@ -1,20 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { css, styled } from "styled-components";
 import CursorContext from "../context/cursor.tsx";
 
 const Cursor = () => {
+  const [smallDevice, setSmalldevice] = useState<boolean>(false);
   const ctx = useContext(CursorContext);
+
+  useEffect(() => {
+    const isSmallDevice = window.matchMedia("(max-width: 768px)").matches; // * 화면크기 최대 768px
+    const isTouch = navigator.maxTouchPoints === 1; // * 터치가 가능한 디바이스인가?
+    if (isSmallDevice && isTouch) setSmalldevice(true);
+  }, []);
+
   return (
     <>
-      <CursorStyle className="cursor" enter={ctx.isMouseMove.toString()} />
-      <SmallCursor className="cursor-s" enter={ctx.isMouseMove.toString()} />
+      <CursorStyle className="cursor" enter={ctx.isMouseMove.toString()} device={smallDevice.toString()} />
+      <SmallCursor className="cursor-s" enter={ctx.isMouseMove.toString()} device={smallDevice.toString()} />
     </>
   );
 };
 
 export default Cursor;
 
-const CursorStyle = styled.div<{ enter: string }>`
+const CursorStyle = styled.div<{ enter: string; device: string }>`
   position: fixed;
   width: 40px;
   height: 40px;
@@ -50,9 +58,15 @@ const CursorStyle = styled.div<{ enter: string }>`
         -webkit-background-clip: text;
       }
     `}
+
+  ${({ device }) =>
+    device === "true" &&
+    css`
+      visibility: hidden;
+    `}
 `;
 
-const SmallCursor = styled.div<{ enter: string }>`
+const SmallCursor = styled.div<{ enter: string; device: string }>`
   position: fixed;
   width: 12px;
   height: 12px;
@@ -63,8 +77,8 @@ const SmallCursor = styled.div<{ enter: string }>`
   z-index: 999;
   pointer-events: none;
 
-  ${({ enter }) =>
-    enter === "true" &&
+  ${(props: { enter: string; device: string }) =>
+    (props.enter === "true" || props.device === "true") &&
     css`
       visibility: hidden;
     `}

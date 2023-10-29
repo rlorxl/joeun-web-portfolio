@@ -63,39 +63,6 @@ const Contact = () => {
     window.addEventListener("resize", setElementWidth);
   }, []);
 
-  // useEffect(() => {
-  //   console.log("실행");
-
-  //   if (!emailElement.current) return;
-  //   let translateWidth = emailElement.current.clientWidth;
-  //   console.log(translateWidth);
-
-  //   const targetIndex = element.length % 2 === 0 ? element.length / 2 : element.length % 2;
-  //   if (!emailParent.current) return;
-  //   const parentEl = [...emailParent.current.children];
-  //   const target = parentEl[targetIndex];
-
-  //   let interval = setInterval(() => {
-  //     if (!target) return;
-  //     x.current = Math.floor(target.getBoundingClientRect().left);
-  //     console.log(x.current + translateWidth);
-
-  //     if (x.current + translateWidth < 100) {
-  //       stop();
-
-  //       let newList = [...element];
-  //       let obj = { id: newList.length + 1 + "", email: "imjoeun08@naver.com" };
-  //       newList.push(obj);
-  //       setElement(newList);
-  //     }
-  //   }, 1000);
-
-  //   const stop = () => {
-  //     console.log("stopped");
-  //     clearInterval(interval);
-  //   };
-  // }, [element]);
-
   return (
     <ContactWrap className="contact">
       <h2 id="contact" className="contact__heading">
@@ -112,7 +79,7 @@ const Contact = () => {
         <p>imjoeun08@naver.com</p>
         <p>+82 5554 8026</p>
         <p>
-          <a href="/">kakao open link</a>
+          <a href="https://open.kakao.com/o/sgB2blPf">kakao open link</a>
         </p>
         <a href="https://github.com/rlorxl">
           <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
