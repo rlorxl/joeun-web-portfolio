@@ -84,6 +84,7 @@ const ExperienceWrap = styled.div`
 
   h2 {
     overflow: hidden;
+    margin-bottom: 14px;
 
     span {
       display: inline-block;
@@ -97,26 +98,44 @@ const ExperienceWrap = styled.div`
   }
 
   li {
-    display: flex;
+    ${({ theme }) => theme.mixins.flexBox({ align: "flex-start" })};
     gap: 130px;
     margin-bottom: 40px;
-    font-size: calc(0.8rem + 0.5vw);
+    font-size: calc(0.6rem + 0.5vw);
     transform: translateY(100%);
     opacity: 0;
-  }
 
-  @media screen and (max-width: 980px) {
-    li {
+    div:nth-child(2) {
+      flex-basis: 380px;
+    }
+
+    @media screen and (max-width: 1600px) {
+      justify-content: space-between;
+      gap: 0;
+    }
+
+    @media screen and (max-width: 1280px) {
+      justify-content: flex-start;
+      gap: 130px;
+    }
+
+    @media screen and (max-width: 980px) {
       gap: 60px;
     }
-  }
 
-  @media screen and (max-width: 768px) {
-    li {
+    @media screen and (max-width: 768px) {
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
+
+      div:nth-child(2) {
+        flex-basis: 0;
+      }
     }
+  }
+
+  @media screen and (max-width: 1280px) {
+    margin-bottom: 0;
   }
 
   @media screen and (max-width: 600px) {

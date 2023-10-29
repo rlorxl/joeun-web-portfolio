@@ -99,7 +99,7 @@ const Contact = () => {
   return (
     <ContactWrap className="contact">
       <h2 id="contact" className="contact__heading">
-        Contact
+        Contact.
       </h2>
       <Email ref={emailParent} movewidth={moveWidth + 100}>
         {element.map(({ id, email }) => (

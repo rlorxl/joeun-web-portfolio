@@ -87,9 +87,12 @@ const Works = () => {
 
   return (
     <WorksWrap>
-      <h2 id="works" className="works">
-        Works.
-      </h2>
+      <HeadingWrap>
+        <h2 id="works" className="works">
+          Works.
+        </h2>
+        <p>썸네일을 클릭하면 웹사이트 링크로 연결됩니다.</p>
+      </HeadingWrap>
       <h3>
         <span className="bg-word1" ref={bgWord1}>
           frontend
@@ -150,26 +153,16 @@ const WorksWrap = styled.section`
   padding-bottom: 12rem;
   background: #111;
 
-  h2 {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%);
-    padding: 7rem 0;
-    color: ${({ theme }) => theme.color.white};
-    z-index: 100;
-  }
-
   h3 {
     grid-area: 1/1/-1/-1;
     width: 100%;
     height: 100vh;
     font-size: calc(1.2rem + 10vw);
-    color: #353535;
     ${({ theme }) => theme.mixins.flexBox({ align: "start", justify: "space-between" })}
     position: sticky;
     top: 0;
     overflow-x: hidden;
+    text-shadow: -1px -1px 0 #353535, 1px -1px 0 #353535, -1px 1px 0 #353535, 1px 1px 0 #353535;
 
     span:nth-child(1) {
       transform: translate(-50%);
@@ -240,6 +233,22 @@ const WorksWrap = styled.section`
     ul {
       padding: 10rem 2rem 0;
     }
+  }
+`;
+
+const HeadingWrap = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 7rem 0;
+  color: #c6c6c6;
+  z-index: 100;
+  text-align: center;
+
+  h2 {
+    color: ${({ theme }) => theme.color.white};
+    margin-bottom: 10px;
   }
 `;
 
