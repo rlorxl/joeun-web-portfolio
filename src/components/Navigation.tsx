@@ -6,13 +6,6 @@ const Navigation = () => {
   const [menuClicked, setMenuClicked] = useState<boolean>(false);
 
   useEffect(() => {
-    gsap.to(".heading", {
-      delay: 0.5,
-      duration: 0.5,
-      y: 0,
-      opacity: 1,
-      ease: "power3,Out",
-    });
     gsap.to(".nav", {
       delay: 0.7,
       duration: 0.5,
@@ -57,15 +50,6 @@ const NavigationWrap = styled.div<{ clicked: string }>`
   position: sticky;
   top: 0;
   z-index: 100;
-
-  h1 {
-    font-size: ${({ theme }) => theme.fontSize.medium1};
-    text-transform: uppercase;
-    font-weight: 500;
-    color: ${({ theme }) => theme.color.white};
-    opacity: 0;
-    transform: translateY(-80%);
-  }
 
   ul {
     ${({ theme }) => theme.mixins.flexBox({ justify: "space-between" })}

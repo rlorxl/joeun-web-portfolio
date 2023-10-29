@@ -289,6 +289,7 @@ const Ko = styled.span`
 const Name = styled.span`
   display: inline-block;
   position: relative;
+  color: ${({ theme }) => theme.color.white};
 `;
 
 const Paragragh1 = styled.div`
