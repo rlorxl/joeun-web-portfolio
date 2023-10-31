@@ -83,12 +83,12 @@ const About = () => {
             <p className="introduce">
               퍼블리싱으로 시작해 웹사이트에 필요한 기본적인 기능들을 구현하는데 이르기까지 <br /> 더 높이 도약하기 위해
               이 분야에 점점 더 몰입하고 있어요.
-              <br /> javascript, react를 이용한 조화로운 ui/ux와 웹 페이지를 구축하는데 관심이 많고, <br /> 재사용성,
-              가독성이 높은 컴포넌트 설계와 클린코드를 지향하기 위해 공부하고 있습니다.
+              <br /> <em>javascript, react</em>를 이용한 <em>조화로운 ui/ux</em>와 웹 페이지를 구축하는데 관심이 많고,{" "}
+              <br /> <em>재사용성, 가독성이 높은 컴포넌트 설계와 클린코드</em>를 지향하기 위해 공부하고 있습니다.
             </p>
             <p className="introduce">
               궁극적인 목표는 제가 가진 능력으로 새롭고 재밌는것들을 만들어내는 것, <br /> 그리고 소프트웨어를
-              만드는것을 통해서 사람들의 더 나은 삶에 기여하는 개발자로 성장하는 것입니다.
+              만드는것을 통해서 <em>사람들의 더 나은 삶에 기여하는 개발자</em>로 성장하는 것입니다.
               <br /> 앞으로 웹 개발 영역에 있어 꼭 필요한 사람이 될 수 있도록 끊임없이 노력하겠습니다.
             </p>
           </Introduce>
@@ -114,16 +114,21 @@ export default About;
 
 const AboutWrap = styled.section`
   margin: 0 auto;
-  padding: 12rem 22rem;
-  background: #fdf6e1;
-  position: relative;
+  padding: 12rem 18rem;
+  background: #fbffe5;
   overflow-x: hidden;
+  position: relatvie;
+
+  @media screen and (max-width: 1440px) {
+    padding: 12rem 15rem;
+  }
 
   @media screen and (max-width: 1280px) {
     padding: 12rem 4rem;
   }
 
   @media screen and (max-width: 768px) {
+    padding: 6rem 4rem 0;
     margin: 0;
   }
 
@@ -134,7 +139,8 @@ const AboutWrap = styled.section`
 
 const Description = styled.div`
   ${({ theme }) => theme.mixins.flexBox({ align: "start", justify: "space-between" })};
-  margin-bottom: 20rem;
+  gap: 100px;
+  margin-bottom: 10rem;
 
   h2 {
     overflow: hidden;
@@ -157,27 +163,45 @@ const Description = styled.div`
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    margin-bottom: 15rem;
+    margin-bottom: 8rem;
   }
 
   @media screen and (max-width: 425px) {
     gap: 35px;
-    margin-bottom: 10rem;
   }
 `;
 
 const Introduce = styled.div`
-  max-width: 895px;
   overflow: hidden;
+  background: #222;
+  padding: 2rem 3rem;
+  border-radius: 28px;
+  color: ${({ theme }) => theme.color.white};
+  flex-basis: 880px;
+
+  em {
+    padding: 2px 5px;
+    text-decoration: underline;
+    font-weight: 500;
+    color: ${({ theme }) => theme.color.appColor};
+  }
 
   p {
     font-family: "Pretendard", sans-serif;
-    font-size: ${({ theme }) => theme.fontSize.medium2};
+    font-size: 1.1rem;
     font-weight: 400;
-    line-height: 38px; /* 211.111% */
-    margin-bottom: 2rem;
+    line-height: 30px; /* 211.111% */
+    margin-bottom: 1.5rem;
     transform: translateY(100%);
     opacity: 0;
+
+    &:nth-child(3) {
+      margin-bottom: 0;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-basis: auto;
   }
 
   @media screen and (max-width: 425px) {
@@ -190,13 +214,14 @@ const Introduce = styled.div`
 `;
 
 const Skills = styled.div`
+  width: 70%;
   display: inline-flex;
   justify-content: start;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
   white-space: nowrap;
-  margin-bottom: 20rem;
+  margin-bottom: 10rem;
 
   & > div {
     font-size: ${({ theme }) => theme.fontSize.large};
@@ -212,34 +237,18 @@ const Skills = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    margin-bottom: 15rem;
-  }
-
-  @media screen and (max-width: 425px) {
-    margin-bottom: 10rem;
+    margin-bottom: 8rem;
   }
 `;
 
 const RoundPath = styled.div`
   width: 50%;
   position: absolute;
-  top: 5%;
-  left: -30%;
+  top: 30%;
+  right: -20%;
 
   img {
     width: 100%;
     height: 100%;
-  }
-
-  @media screen and (max-width: 1280px) {
-    width: 60%;
-    top: 8%;
-    left: -45%;
-  }
-
-  @media screen and (max-width: 768px) {
-    top: 16%;
-    left: 64%;
-    opacity: 0.2;
   }
 `;

@@ -14,6 +14,7 @@ type Projects = {
   src: { path: string; alt: string };
   stack: string[];
   description: string[];
+  tags: string[];
   link: string;
   portfolioLink?: string;
   githubLink?: string;
@@ -100,6 +101,7 @@ const projects: Projects[] = [
       "Next.js의 이해도를 높이고 하나뿐인 블로그를 만들기 위해 개발중",
       "cookie를 활용한 다크모드를 구현하고, 페이지별 메타태그를 적용",
     ],
+    tags: ["개인", "모바일", "블로그"],
     link: "https://rlorxl.me",
   },
   {
@@ -117,6 +119,7 @@ const projects: Projects[] = [
       "실제 사용되는 이커머스 플랫폼이라고 가정하고 게시물 업로드 로직을 구현",
       "서버리스db를 활용하여 유저별 데이터를 관리",
     ],
+    tags: ["FE 2인", "웹앱", "기획", "디자인", "개발"],
     link: "https://panda-vert.vercel.app/",
     portfolioLink: "https://fire-climb-c7d.notion.site/Panda-6261ca29817949c2b93448910f6a4c90?pvs=25",
   },
@@ -134,6 +137,7 @@ const projects: Projects[] = [
       "Firebase Authentication을 이용한 로그인, 회원가입",
       "jwt로 유저의 인증을 확인하고 이에 따른 동적 라우팅 구현",
     ],
+    tags: ["FE 2인", "open API"],
     link: "https://react-tmoney-bus.vercel.app/login",
     portfolioLink: "https://fire-climb-c7d.notion.site/7c0fe83095b548c9be68bfd8154b0f2d?pvs=4",
   },
@@ -147,6 +151,7 @@ const projects: Projects[] = [
     },
     stack: ["Javascript", "SCSS"],
     description: ["RIDI Webtoon 클론&개선 프로젝트", "바닐라 자바스크립트로 RIDI웹툰 사이트를 클론코딩하여 SPA를 구현"],
+    tags: ["FE 4인", "반응형", "JS"],
     link: "https://ridiwebtoon-clone-1f3ce80a7f8e.herokuapp.com/",
     portfolioLink: "https://fire-climb-c7d.notion.site/RIDI-2e70feca707e45f1b4ce1ad1de69cf84?pvs=4",
   },
@@ -160,6 +165,7 @@ const projects: Projects[] = [
     },
     stack: ["Javascript", "SCSS"],
     description: ["Melon 웹사이트 클론 & 개선 프로젝트", "클론코딩, 반응형 구현"],
+    tags: ["FE 4인", "반응형", "JS"],
     link: "https://rlorxl.github.io/responsive-website-melon.github.io/",
     githubLink: "https://github.com/rlorxl/responsive-website-melon.github.io",
   },

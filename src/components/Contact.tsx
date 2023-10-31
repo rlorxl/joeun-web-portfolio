@@ -19,7 +19,7 @@ const Contact = () => {
   t1.current = gsap.timeline({ paused: true });
 
   const changeBgColor = () => {
-    gsap.to(".main", {
+    gsap.to([".contact", ".article"], {
       background: "#CCF036",
     });
     gsap.to([".contact", ".contact__heading", ".contact a"], {
@@ -28,11 +28,14 @@ const Contact = () => {
   };
 
   const resetBgColor = () => {
-    gsap.to(".main", {
+    gsap.to([".contact", ".article"], {
       background: "#111",
     });
-    gsap.to([".contact", ".contact__heading", ".contact a"], {
+    gsap.to([".contact", ".contact a"], {
       color: "#f0f0f0",
+    });
+    gsap.to(".contact__heading", {
+      color: "#CCF036",
     });
   };
 
@@ -104,7 +107,7 @@ const ContactWrap = styled.section`
   color: ${({ theme }) => theme.color.white};
 
   h2 {
-    color: ${({ theme }) => theme.color.white};
+    color: ${({ theme }) => theme.color.appColor};
   }
 
   div > p {

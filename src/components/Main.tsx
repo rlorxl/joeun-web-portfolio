@@ -1,8 +1,9 @@
 /* eslint-disable object-shorthand */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { styled, keyframes } from "styled-components";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Main = () => {
   const [moveWidth, setMoveWidth] = useState<number>(0);
@@ -77,25 +78,6 @@ const Main = () => {
         stagger: { amount: 0.8 },
       });
   };
-
-  // const marquee = () => {
-  //   if (!p2.current) return;
-  //   let rate = 100;
-  //   let distance = p2.current.clientWidth;
-  //   let style = window.getComputedStyle(p2.current);
-  //   let marginRight = Number(style.marginRight) || 20;
-  //   let totalDistance = distance + marginRight;
-  //   let time = totalDistance / rate;
-
-  //   if (!t2.current) return;
-  //   t2.current.play();
-  //   t2.current.to(".p2", {
-  //     duration: time,
-  //     repeat: -1,
-  //     x: -totalDistance,
-  //     ease: "none",
-  //   });
-  // };
 
   useEffect(() => {
     typeAni1();
@@ -180,6 +162,8 @@ const Main = () => {
 export default Main;
 
 const MainWrap = styled.section`
+  position: sticky;
+  top: 0;
   height: calc(100vh - 100px);
   padding: 0 8rem;
   ${({ theme }) => theme.mixins.flexBox()};
@@ -187,7 +171,7 @@ const MainWrap = styled.section`
   font-size: calc(1rem + 4.5vw);
   font-weight: 600;
   border-bottom: 2px solid #111;
-  position: relative;
+  z-index: -1;
 
   p {
     white-space: nowrap;

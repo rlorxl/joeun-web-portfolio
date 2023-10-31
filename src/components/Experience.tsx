@@ -84,7 +84,7 @@ const ExperienceWrap = styled.div`
 
   h2 {
     overflow: hidden;
-    margin-bottom: 14px;
+    margin-bottom: 40px;
 
     span {
       display: inline-block;
@@ -94,7 +94,7 @@ const ExperienceWrap = styled.div`
   }
 
   ul {
-    margin-left: 172px;
+    margin-left: -150px;
   }
 
   li {
@@ -109,24 +109,9 @@ const ExperienceWrap = styled.div`
       flex-basis: 380px;
     }
 
-    @media screen and (max-width: 1600px) {
-      justify-content: space-between;
-      gap: 0;
-    }
-
-    @media screen and (max-width: 1280px) {
-      justify-content: flex-start;
-      gap: 130px;
-    }
-
-    @media screen and (max-width: 980px) {
-      gap: 60px;
-    }
-
     @media screen and (max-width: 768px) {
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 40px;
 
       div:nth-child(2) {
         flex-basis: 0;
@@ -134,17 +119,9 @@ const ExperienceWrap = styled.div`
     }
   }
 
-  @media screen and (max-width: 1280px) {
-    margin-bottom: 0;
-  }
-
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1600px) {
     ul {
-      margin: 0;
-    }
-
-    h2 {
-      margin-bottom: 35px;
+      margin-left: 0;
     }
   }
 `;
