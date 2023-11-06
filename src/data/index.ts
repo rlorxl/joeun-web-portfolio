@@ -169,6 +169,20 @@ const projects: Projects[] = [
     link: "https://rlorxl.github.io/responsive-website-melon.github.io/",
     githubLink: "https://github.com/rlorxl/responsive-website-melon.github.io",
   },
+  {
+    id: "project6",
+    name: "Dior반응형 웹",
+    date: "2023.7",
+    src: {
+      path: Images.default.work6,
+      alt: "프로젝트6",
+    },
+    stack: ["Javascript", "SCSS", "jquery"],
+    description: ["디올 사이트 리디자인", "스크롤 모션"],
+    tags: ["개인", "반응형", "JS"],
+    link: "https://rlorxl.github.io/",
+    githubLink: "https://github.com/rlorxl/rlorxl.github.io",
+  },
 ];
 
 const articles: Article[] = [
