@@ -1,48 +1,37 @@
-import { gsap } from "gsap";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const useMouse = () => {
-  const coordinate = {
-    mouseX: 0,
-    mouseY: 0,
-    smallMouseX: 0,
-    smallMouseY: 0,
-  };
+  const [smallDevice, setSmalldevice] = useState<boolean>(false);
+
+  const mouseDefault = useRef<HTMLDivElement>(null);
+  const mouseBack = useRef<HTMLDivElement>(null);
 
   const mousemoveHandler = (e: MouseEvent) => {
-    coordinate.smallMouseX = e.clientX;
-    coordinate.smallMouseY = e.clientY;
+    if (mouseDefault.current) {
+      mouseDefault.current.style.left = `${e.clientX}px`;
+      mouseDefault.current.style.top = `${e.clientY}px`;
+    }
+
     setTimeout(() => {
-      coordinate.mouseX = e.clientX;
-      coordinate.mouseY = e.clientY;
-    }, 250);
+      if (mouseBack.current) {
+        mouseBack.current.style.left = `${e.clientX}px`;
+        mouseBack.current.style.top = `${e.clientY}px`;
+      }
+    }, 150);
   };
 
   useEffect(() => {
-    gsap.to(
-      {},
-      {
-        duration: 0.1,
-        repeat: -1,
-        onRepeat: () => {
-          gsap.set(".cursor", {
-            css: {
-              left: coordinate.mouseX,
-              top: coordinate.mouseY,
-            },
-          });
-          gsap.set(".cursor-s", {
-            css: {
-              left: coordinate.smallMouseX,
-              top: coordinate.smallMouseY,
-            },
-          });
-        },
-      }
-    );
+    const isSmallDevice = window.matchMedia("(max-width: 768px)").matches; // * s화면크기 최대 768px
+    const isTouch = navigator.maxTouchPoints === 1; // * 터치가 가능한 디바이스인가?
+    if (isSmallDevice && isTouch) setSmalldevice(true);
   }, []);
 
-  return [mousemoveHandler];
+  return {
+    device: smallDevice,
+    mouse: mouseDefault,
+    mouseBehind: mouseBack,
+    mousemoveHandler,
+  };
 };
 
 export default useMouse;

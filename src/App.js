@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import { gsap } from "gsap";
 import About from "./components/About.tsx";
@@ -8,10 +8,11 @@ import Works from "./components/Works.tsx";
 import Article from "./components/Article.tsx";
 import Contact from "./components/Contact.tsx";
 import Cursor from "./ui/Cursor.tsx";
+import CursorBehind from "./ui/CursorBehind.tsx";
 import useMouse from "./hooks/useMouse.tsx";
 
 function App() {
-  const [mousemoveHandler] = useMouse();
+  const { device, mouse, mouseBehind, mousemoveHandler } = useMouse();
 
   useEffect(() => {
     gsap.to(".heading", {
@@ -25,7 +26,8 @@ function App() {
 
   return (
     <div onMouseMove={mousemoveHandler} style={{ position: "relative" }}>
-      <Cursor />
+      <CursorBehind ref={mouseBehind} isSmDevice={device} />
+      <Cursor ref={mouse} isSmDevice={device} />
       <Navigation />
       <Logo className="heading">Joeun lee web portfolio</Logo>
       <main className="main">
