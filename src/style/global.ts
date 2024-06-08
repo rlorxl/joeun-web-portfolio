@@ -20,17 +20,24 @@ html {
 *::-webkit-scrollbar, 
 html::-webkit-scrollbar, 
 body::-webkit-scrollbar {
-  background-color: #111;
+  background-color: #222;
+}
+
+*::-webkit-scrollbar-thumb, 
+html::-webkit-scrollbar-thumb, 
+body::-webkit-scrollbar-thumb {
+  background-color: #A4A2A2;
+  border-radius: 99em;
+  border: 6px solid #222;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
   color: #111;
-  background-color: #111;
+  background: #111;
   position: relative;
   overflow-x: hidden;
-  
 
   -webkit-user-select:none;
   -moz-user-select:none;
@@ -41,6 +48,7 @@ body {
 
 section {
   position: relative;
+  background: #111;
 }
 
 div,
@@ -81,6 +89,7 @@ const global = {
 const color = {
   appColor: "#CCF036",
   fontColor: "#4C4C4C",
+  darkmodeColor: "#C5C5C5",
   white: "#f8f8f8",
   black: "#222",
   borderColor: "#A4A2A2",

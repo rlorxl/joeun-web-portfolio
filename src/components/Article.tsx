@@ -74,11 +74,11 @@ const ArticleWrap = styled.section`
   ${({ theme }) => theme.mixins.flexBox({ justify: "space-between", align: "flex-start" })};
   font-size: ${({ theme }) => theme.fontSize.medium2};
   gap: 200px;
-  background: #111;
   color: ${({ theme }) => theme.color.white};
+  background: #111;
 
   h2 {
-    color: ${({ theme }) => theme.color.white};
+    color: ${({ theme }) => theme.color.appColor};
     margin-bottom: 67px;
     overflow: hidden;
 
@@ -96,6 +96,7 @@ const ArticleWrap = styled.section`
   }
 
   p {
+    color: ${({ theme }) => theme.color.darkmodeColor};
     transform: translateY(100%);
     opacity: 0;
   }

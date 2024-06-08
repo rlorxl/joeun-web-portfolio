@@ -102,7 +102,7 @@ const Works = () => {
         </span>
       </h3>
       <ul>
-        {Data.projects.map(({ id, name, date, src, stack, description, link, portfolioLink, githubLink }, i) => (
+        {Data.projects.map(({ id, name, date, src, stack, description, tags, link, portfolioLink, githubLink }, i) => (
           <li key={i} id={id} className={id}>
             <ImageBox imageid={id} onMouseEnter={() => ctx.mouseHandler()} onMouseLeave={() => ctx.mouseHandler()}>
               <a href={link} target="_blank" rel="noreferrer">
@@ -121,6 +121,11 @@ const Works = () => {
                 <span>{name}</span>
                 <span>{date}</span>
               </p>
+              <Tag>
+                {tags.map((tag, i) => (
+                  <span key={tag + i}>{tag}</span>
+                ))}
+              </Tag>
               <div>
                 {description.map((desc, i) => (
                   <p key={desc + i}>{desc}</p>
@@ -231,7 +236,7 @@ const WorksWrap = styled.section`
 
   @media screen and (max-width: 425px) {
     ul {
-      padding: 10rem 2rem 0;
+      padding: 16rem 2rem 0;
     }
   }
 `;
@@ -337,7 +342,6 @@ const DescBox = styled.div`
   flex: 1 250px;
 
   & > p {
-    margin-bottom: 30px;
     color: ${({ theme }) => theme.color.white};
 
     span:nth-child(1) {
@@ -355,7 +359,7 @@ const DescBox = styled.div`
 
   & > div {
     font-size: ${({ theme }) => theme.fontSize.medium2};
-    color: #dddddd;
+    color: ${({ theme }) => theme.color.darkmodeColor};
 
     p {
       padding-left: 16px;
@@ -383,6 +387,19 @@ const DescBox = styled.div`
     & > div {
       font-size: calc(0.8rem + 0.5vw);
     }
+  }
+`;
+
+const Tag = styled.div`
+  margin-bottom: 35px;
+
+  span {
+    font-size: ${({ theme }) => theme.fontSize.small};
+    padding: 3px 12px;
+    background: #383838;
+    border-radius: 15px;
+    margin-right: 8px;
+    color: ${({ theme }) => theme.color.darkmodeColor};
   }
 `;
 

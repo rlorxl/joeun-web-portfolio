@@ -215,4 +215,9 @@ const Menu = styled.div<{ clicked: string }>`
   @media screen and (max-width: 768px) {
     display: block;
   }
+
+  @media screen and (max-width: 425px) {
+    width: 22px;
+    height: 19px;
+  }
 `;
