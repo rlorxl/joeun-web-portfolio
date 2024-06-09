@@ -71,6 +71,7 @@ export default Article;
 
 const ArticleWrap = styled.section`
   padding: 12rem;
+  padding-top: 5rem;
   ${({ theme }) => theme.mixins.flexBox({ justify: "space-between", align: "flex-start" })};
   font-size: ${({ theme }) => theme.fontSize.medium2};
   gap: 200px;

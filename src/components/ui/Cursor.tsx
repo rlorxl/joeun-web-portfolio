@@ -20,7 +20,7 @@ const SmallCursor = styled.div<{ enter: string; device: boolean }>`
   border-radius: 50%;
   margin-left: -4.5px;
   margin-top: -4.5px;
-  z-index: 999;
+  z-index: 101;
   pointer-events: none;
 
   ${(props: { enter: string; device: boolean }) =>

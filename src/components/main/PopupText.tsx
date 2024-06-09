@@ -44,7 +44,7 @@ const PopupText = ({ text, duration = 0.2 }: { text: string | string[]; duration
   }, [text, isStart]);
 
   return (
-    <Container onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+    <Container onMouseEnter={() => expandHandler(true)} onMouseLeave={() => expandHandler(false)}>
       {isStart
         ? displayedText.map((char, i) => (
             <Text key={char + i} duration={i * duration}>

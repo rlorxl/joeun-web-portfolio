@@ -30,7 +30,7 @@ const CursorStyle = styled.div<{ expand: string; enter: string; device: boolean 
   margin-top: -20px;
   opacity: 0.5;
   transition: scale 0.1s ease-out;
-  z-index: 999;
+  z-index: 100;
   pointer-events: none; // * 마우스 이벤트가 적용되지 않게 하는 속성
   mix-blend-mode: difference;
 

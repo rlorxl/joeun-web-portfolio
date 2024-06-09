@@ -88,13 +88,14 @@ const global = {
 };
 
 const color = {
-  appColor: "#F04545",
+  // appColor: "#F04545",
+  appColor: "#2A18FF",
   fontColor: "#222",
   darkmodeColor: "#C5C5C5",
   backgroundColor: "#f2f2f2",
   darkmodeBackgroundColor: "#242424",
   white: "#f8f8f8",
-  black: "#222",
+  black: "#111",
   borderColor: "#A4A2A2",
 };
 

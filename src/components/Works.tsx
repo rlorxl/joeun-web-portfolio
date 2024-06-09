@@ -6,7 +6,7 @@ import Data from "../data/index.ts";
 import CursorContext from "../context/cursor.tsx";
 
 const Works = () => {
-  const ctx = useContext(CursorContext);
+  const { mouseHandler } = useContext(CursorContext);
   const bgWord1 = useRef<HTMLSpanElement>(null);
   const bgWord2 = useRef<HTMLSpanElement>(null);
   const t1 = useRef<GSAPTimeline>();
@@ -104,7 +104,7 @@ const Works = () => {
       <ul>
         {Data.projects.map(({ id, name, date, src, stack, description, tags, link, portfolioLink, githubLink }, i) => (
           <li key={i} id={id} className={id}>
-            <ImageBox imageid={id} onMouseEnter={() => ctx.mouseHandler()} onMouseLeave={() => ctx.mouseHandler()}>
+            <ImageBox imageid={id} onMouseEnter={() => mouseHandler(true)} onMouseLeave={() => mouseHandler(false)}>
               <a href={link} target="_blank" rel="noreferrer">
                 <div>
                   <img src={src.path} alt={src.alt} />
@@ -156,7 +156,7 @@ const WorksWrap = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10%, auto));
   padding-bottom: 12rem;
-  background: #111;
+  background: ${({ theme }) => theme.color.black};
 
   h3 {
     grid-area: 1/1/-1/-1;
@@ -167,7 +167,7 @@ const WorksWrap = styled.section`
     position: sticky;
     top: 0;
     overflow-x: hidden;
-    text-shadow: -1px -1px 0 #353535, 1px -1px 0 #353535, -1px 1px 0 #353535, 1px 1px 0 #353535;
+    text-shadow: -1px -1px 0 #2a18ff, 1px -1px 0 #2a18ff, -1px 1px 0 #2a18ff, 1px 1px 0 #2a18ff;
 
     span:nth-child(1) {
       transform: translate(-50%);
@@ -246,7 +246,7 @@ const HeadingWrap = styled.div`
   top: 0;
   left: 50%;
   transform: translate(-50%);
-  padding: 7rem 0;
+  padding: 10rem 0;
   color: #c6c6c6;
   z-index: 100;
   text-align: center;
@@ -412,7 +412,7 @@ const Button = styled.a`
   margin-top: 30px;
   font-size: ${({ theme }) => theme.fontSize.medium2};
   font-weight: 700;
-  color: #222;
+  color: ${({ theme }) => theme.color.white};
   text-transform: uppercase;
 
   @media screen and (max-width: 425px) {
