@@ -26,17 +26,20 @@ const Main = () => {
   return (
     <MainWrap>
       <InnerBox>
-        <Greeting onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+        <Greeting onMouseEnter={() => expandHandler(true)} onMouseLeave={() => expandHandler(false)}>
           <TypingText text={["Hell☻", "안녕하세요", "こんにちは", "Bonjour", "Hola!"]} />
           <Name>I'm Joeun</Name>
         </Greeting>
         <PopupTextBox>
           <PopupText text={["Sensible", "Flexible", "Steady"]} />
-          <Star onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+          <Star onMouseEnter={() => expandHandler(true)} onMouseLeave={() => expandHandler(false)}>
             ✳︎
           </Star>
         </PopupTextBox>
-        <MarqueeText movewidth={moveWidth + 50} onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+        <MarqueeText
+          movewidth={moveWidth + 50}
+          onMouseEnter={() => expandHandler(true)}
+          onMouseLeave={() => expandHandler(false)}>
           {Array(2)
             .fill("")
             .map(item => (
@@ -137,7 +140,7 @@ const scroll = (movewidth: number) => keyframes`
 const MarqueeText = styled.div<{ movewidth: number }>`
   width: 1000px;
   height: 100%;
-  background: #c148ec;
+  border: 2px solid ${({ theme }) => theme.color.appColor};
   border-radius: 100px;
   padding: 10px calc(1rem + 2vw);
   overflow: hidden;
@@ -149,7 +152,7 @@ const MarqueeText = styled.div<{ movewidth: number }>`
   p {
     margin-right: 50px;
     /* background: linear-gradient(90deg, rgba(29, 255, 142, 1) 0%, rgba(255, 242, 68, 1) 56%, rgba(255, 255, 255, 1) 89%); */
-    background: #222;
+    background: ${({ theme }) => theme.color.appColor};
     background-size: 200% auto;
     color: transparent;
     -moz-background-clip: text;

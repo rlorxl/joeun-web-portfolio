@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { keyframes, styled } from "styled-components";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CursorContext from "../context/cursor.tsx";
 
 const element = [
   { id: "1", email: "imjoeun08@naver.com" },
@@ -10,6 +11,7 @@ const element = [
 ];
 
 const Contact = () => {
+  const { expandHandler } = useContext(CursorContext);
   const [moveWidth, setMoveWidth] = useState<number>(0);
 
   const emailParent = useRef<HTMLParagraphElement>(null);
@@ -20,10 +22,10 @@ const Contact = () => {
 
   const changeBgColor = () => {
     gsap.to([".contact", ".article"], {
-      background: "#F04545",
+      background: "#2A18FF",
     });
     gsap.to([".contact", ".contact__heading", ".contact a"], {
-      color: "#222",
+      color: "#111",
     });
   };
 
@@ -35,7 +37,7 @@ const Contact = () => {
       color: "#f0f0f0",
     });
     gsap.to(".contact__heading", {
-      color: "#F04545",
+      color: "#2A18FF",
     });
   };
 
@@ -71,7 +73,11 @@ const Contact = () => {
       <h2 id="contact" className="contact__heading">
         Contact.
       </h2>
-      <Email ref={emailParent} movewidth={moveWidth + 100}>
+      <Email
+        ref={emailParent}
+        movewidth={moveWidth + 100}
+        onMouseEnter={() => expandHandler(true)}
+        onMouseLeave={() => expandHandler(false)}>
         {element.map(({ id, email }) => (
           <span className={`email email${id}`} key={id} ref={emailElement}>
             {email}
@@ -112,7 +118,6 @@ const ContactWrap = styled.section`
   }
 
   svg {
-    cursor: pointer;
     margin-top: 32px;
   }
 

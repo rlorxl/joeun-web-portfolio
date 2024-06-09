@@ -21,13 +21,13 @@ const Navigation = () => {
   return (
     <NavigationWrap clicked={menuClicked.toString()}>
       <ul>
-        <li className="nav" onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+        <li className="nav" onMouseEnter={() => expandHandler(true)} onMouseLeave={() => expandHandler(false)}>
           <a href="#about">About</a>
         </li>
-        <li className="nav" onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+        <li className="nav" onMouseEnter={() => expandHandler(true)} onMouseLeave={() => expandHandler(false)}>
           <a href="#works">Works</a>
         </li>
-        <li className="nav" onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+        <li className="nav" onMouseEnter={() => expandHandler(true)} onMouseLeave={() => expandHandler(false)}>
           <a href="#contact">Contact</a>
         </li>
       </ul>

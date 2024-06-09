@@ -80,7 +80,7 @@ const Experience = () => {
 export default Experience;
 
 const ExperienceWrap = styled.div`
-  margin-bottom: 10rem;
+  margin-bottom: 6rem;
 
   h2 {
     overflow: hidden;
