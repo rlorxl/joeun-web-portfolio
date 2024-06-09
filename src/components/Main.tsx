@@ -27,13 +27,13 @@ const Main = () => {
     <MainWrap>
       <InnerBox>
         <Greeting onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
-          <TypingText text={["Hello", "안녕하세요", "こんにちは", "Bonjour", "Hola!"]} />
-          <Name style={{ marginLeft: "60px" }}>I'm Joeun,</Name>
+          <TypingText text={["Hell☻", "안녕하세요", "こんにちは", "Bonjour", "Hola!"]} />
+          <Name>I'm Joeun</Name>
         </Greeting>
         <PopupTextBox>
           <PopupText text={["Sensible", "Flexible", "Steady"]} />
           <Star onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
-            *
+            ✳︎
           </Star>
         </PopupTextBox>
         <MarqueeText movewidth={moveWidth + 50} onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
@@ -41,7 +41,7 @@ const Main = () => {
             .fill("")
             .map(item => (
               <p className="p2" ref={p2}>
-                Frontend Developer *
+                Frontend Developer ❇︎ Web Developer ❇︎
               </p>
             ))}
         </MarqueeText>
@@ -61,6 +61,7 @@ const MainWrap = styled.section`
   font-family: "Montserrat", sans-serif;
   font-size: calc(1.2rem + 6vw);
   font-weight: 600;
+  letter-spacing: -4px;
   /* z-index: -1; */
 
   p {
@@ -84,7 +85,10 @@ const InnerBox = styled.div`
   width: 1400px;
   max-width: 1800px;
   position: relative;
-  overflow: hidden;
+
+  @media screen and (max-width: 520px) {
+    width: 100%;
+  }
 `;
 
 const Greeting = styled.div`
@@ -94,36 +98,33 @@ const Greeting = styled.div`
   align-items: flex-end;
   margin-bottom: 45px;
 
-  /* @media screen and (max-width: 980px) {
+  @media screen and (max-width: 520px) {
     flex-direction: column;
     align-items: flex-start;
-    grid-column: 1 / span 3;
 
-    span:nth-child(1) {
-      min-height: 50%;
+    span {
+      margin-left: 0;
     }
-    span:nth-child(2) {
-      margin-left: 0 !important;
-    }
-  } */
+  }
 `;
 
 const Name = styled.span`
   display: inline-block;
   position: relative;
   color: ${({ theme }) => theme.color.fontColor};
+  margin-left: 60px;
+
+  @media screen and (max-width: 980px) {
+    margin-left: 30px;
+  }
 `;
 
 const PopupTextBox = styled.div`
+  width: fit-content;
   display: flex;
   gap: 20px;
   align-items: center;
   margin-bottom: 45px;
-`;
-
-const Star = styled.span`
-  font-size: 12rem;
-  color: ${({ theme }) => theme.color.fontColor};
 `;
 
 const scroll = (movewidth: number) => keyframes`
@@ -143,6 +144,7 @@ const MarqueeText = styled.div<{ movewidth: number }>`
   position: relative;
   display: flex;
   margin-left: auto;
+  position: relative;
 
   p {
     margin-right: 50px;
@@ -157,6 +159,32 @@ const MarqueeText = styled.div<{ movewidth: number }>`
 
   @media screen and (max-width: 980px) {
     grid-column: 1 / span 8;
-    border-radius: 15%;
+    border-radius: 55px;
+    width: 500px;
   }
+
+  @media screen and (max-width: 520px) {
+    width: 100%;
+  }
+`;
+
+const Star = styled.span`
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.color.fontColor};
+  transform: rotate(45deg) translateX(-50%);
+  animation: rotation 2s linear infinite;
+  transform-origin: center;
 `;

@@ -68,7 +68,8 @@ const Container = styled.div`
   padding: 10px calc(1rem + 2vw);
   background-color: ${({ theme }) => theme.color.appColor};
   border-radius: 150px;
-  color: #222;
+  color: ${({ theme }) => theme.color.white};
+  white-space: nowrap;
   overflow: hidden;
 `;
 
