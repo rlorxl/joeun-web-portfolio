@@ -3,12 +3,12 @@ import { styled } from "styled-components";
 import { gsap } from "gsap";
 import About from "./components/About.tsx";
 import Main from "./components/Main.tsx";
-import Navigation from "./components/Navigation.tsx";
+import Navigation from "./components/ui/Navigation.tsx";
 import Works from "./components/Works.tsx";
 import Article from "./components/Article.tsx";
 import Contact from "./components/Contact.tsx";
-import Cursor from "./ui/Cursor.tsx";
-import CursorBehind from "./ui/CursorBehind.tsx";
+import Cursor from "./components/ui/Cursor.tsx";
+import CursorBehind from "./components/ui/CursorBehind.tsx";
 import useMouse from "./hooks/useMouse.tsx";
 
 function App() {
@@ -45,7 +45,7 @@ export default App;
 
 const Logo = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.medium1};
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.fontColor};
   text-transform: uppercase;
   position: absolute;
   top: 25px;

@@ -1,18 +1,26 @@
 import { css, styled } from "styled-components";
 import { forwardRef, useContext } from "react";
-import CursorContext from "../context/cursor.tsx";
+import CursorContext from "../../context/cursor.tsx";
 
 const CursorBehind = forwardRef(({ device }: { device: boolean }, ref) => {
-  const ctx = useContext(CursorContext);
+  const { isMouseMove, expand } = useContext(CursorContext);
 
   const cursorRef = ref as React.LegacyRef<HTMLDivElement>;
 
-  return <CursorStyle ref={cursorRef} className="cursor" enter={ctx.isMouseMove.toString()} device={device} />;
+  return (
+    <CursorStyle
+      ref={cursorRef}
+      className="cursor"
+      expand={expand.toString()}
+      enter={isMouseMove.toString()}
+      device={device}
+    />
+  );
 });
 
 export default CursorBehind;
 
-const CursorStyle = styled.div<{ enter: string; device: boolean }>`
+const CursorStyle = styled.div<{ expand: string; enter: string; device: boolean }>`
   position: fixed;
   width: 40px;
   height: 40px;
@@ -25,6 +33,14 @@ const CursorStyle = styled.div<{ enter: string; device: boolean }>`
   z-index: 999;
   pointer-events: none; // * 마우스 이벤트가 적용되지 않게 하는 속성
   mix-blend-mode: difference;
+
+  ${({ expand }) =>
+    expand === "true" &&
+    css`
+      scale: 8;
+      background: #fff;
+      opacity: 1;
+    `}
 
   ${({ enter }) =>
     enter === "true" &&

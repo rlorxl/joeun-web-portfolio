@@ -1,88 +1,18 @@
 /* eslint-disable object-shorthand */
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useContext, useLayoutEffect, useRef, useState } from "react";
 import { styled, keyframes } from "styled-components";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TypingText from "./main/TypingText.tsx";
+import PopupText from "./main/PopupText.tsx";
+import CursorContext from "../context/cursor.tsx";
 
 const Main = () => {
+  const { expandHandler } = useContext(CursorContext);
   const [moveWidth, setMoveWidth] = useState<number>(0);
 
   const p2 = useRef<HTMLParagraphElement>(null);
-  const t1 = useRef<GSAPTimeline>();
-  const t2 = useRef<GSAPTimeline>();
-  const t3 = useRef<GSAPTimeline>();
-  t1.current = gsap.timeline({ paused: true, repeat: -1 });
-  t2.current = gsap.timeline({ paused: true });
-  t3.current = gsap.timeline({ paused: true, repeat: -1 });
 
-  const typeAni1 = () => {
-    if (!t1.current) return;
-    t1.current.play();
-    t1.current
-      .to(".en", {
-        delay: 1.5,
-        display: "block",
-        duration: 0.4,
-        stagger: { amount: 1.5 },
-        yoyo: true,
-        repeat: 1,
-        repeatDelay: 0.5,
-      })
-      .to(".ko", {
-        display: "block",
-        delay: 1.5,
-        duration: 0.4,
-        stagger: { amount: 0.8 },
-        yoyo: true,
-        repeat: 1,
-        repeatDelay: 0.5,
-      });
-  };
-
-  const typeAni2 = () => {
-    if (!t3.current) return;
-    t3.current.play();
-    t3.current.set(".p1", {
-      visibility: "visible",
-      yPercent: 90,
-    });
-    t3.current
-      .to(".p1", {
-        yPercent: 0,
-        duration: 0.4,
-        ease: "power3.Out",
-        stagger: { amount: 0.8 },
-      })
-      .to(".p1", {
-        visibility: "hidden",
-        ease: "none",
-        stagger: { amount: 0.8 },
-      })
-      .fromTo(
-        ".p1-1",
-        {
-          yPercent: 50,
-        },
-        {
-          visibility: "visible",
-          yPercent: -100,
-          duration: 0.4,
-          ease: "power3.Out",
-          stagger: { amount: 0.8 },
-        }
-      )
-      .to(".p1-1", {
-        visibility: "hidden",
-        ease: "none",
-        stagger: { amount: 0.8 },
-      });
-  };
-
-  useEffect(() => {
-    typeAni1();
-    typeAni2();
-
+  useLayoutEffect(() => {
     const setElementWidth = () => {
       if (!p2.current) return;
       let translateWidth = p2.current.clientWidth;
@@ -95,66 +25,27 @@ const Main = () => {
 
   return (
     <MainWrap>
-      <GridBox>
-        <Greeting>
-          <Inner>
-            <En>
-              {"Hello".split("").map((word, i) => {
-                if (i === 4)
-                  return (
-                    <span key={i} className="en" style={{ marginRight: "30px" }}>
-                      {word}
-                    </span>
-                  );
-                return (
-                  <span key={i} className="en">
-                    {word}
-                  </span>
-                );
-              })}
-              {"World✨".split("").map((word, i) => (
-                <span key={i} className="en">
-                  {word}
-                </span>
-              ))}
-            </En>
-            <Ko>
-              {["안", "녕", "하", "세", "요", "😀"].map((word, i) => (
-                <span key={i} className="ko">
-                  {word}
-                </span>
-              ))}
-            </Ko>
-          </Inner>
+      <InnerBox>
+        <Greeting onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+          <TypingText text={["Hello", "안녕하세요", "こんにちは", "Bonjour", "Hola!"]} />
           <Name style={{ marginLeft: "60px" }}>I'm Joeun,</Name>
         </Greeting>
-        <Paragragh1>
-          <div>
-            <p>
-              {"Sensible".split("").map((word, i) => (
-                <span key={i} className="p1">
-                  {word}
-                </span>
-              ))}
-            </p>
-            <p>
-              {"Steady".split("").map((word, i) => (
-                <span key={i} className="p1-1">
-                  {word}
-                </span>
-              ))}
-            </p>
-          </div>
-        </Paragragh1>
-        <Paragragh2 movewidth={moveWidth + 50}>
-          <p className="p2" ref={p2}>
-            Frontend Developer * Publisher
-          </p>
-          <p className="p2" ref={p2}>
-            Frontend Developer * Publisher
-          </p>
-        </Paragragh2>
-      </GridBox>
+        <PopupTextBox>
+          <PopupText text={["Sensible", "Flexible", "Steady"]} />
+          <Star onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+            *
+          </Star>
+        </PopupTextBox>
+        <MarqueeText movewidth={moveWidth + 50} onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+          {Array(2)
+            .fill("")
+            .map(item => (
+              <p className="p2" ref={p2}>
+                Frontend Developer *
+              </p>
+            ))}
+        </MarqueeText>
+      </InnerBox>
     </MainWrap>
   );
 };
@@ -168,10 +59,9 @@ const MainWrap = styled.section`
   padding: 0 8rem;
   ${({ theme }) => theme.mixins.flexBox()};
   font-family: "Montserrat", sans-serif;
-  font-size: calc(1rem + 4.5vw);
+  font-size: calc(1.2rem + 6vw);
   font-weight: 600;
-  border-bottom: 2px solid #111;
-  z-index: -1;
+  /* z-index: -1; */
 
   p {
     white-space: nowrap;
@@ -190,28 +80,21 @@ const MainWrap = styled.section`
   }
 `;
 
-const GridBox = styled.div`
-  width: 1768px;
+const InnerBox = styled.div`
+  width: 1400px;
   max-width: 1800px;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(3, minmax(200px, auto));
-  align-items: center;
   position: relative;
-
-  @media screen and (max-width: 425px) {
-    grid-template-rows: repeat(3, minmax(110px, auto));
-  }
+  overflow: hidden;
 `;
 
 const Greeting = styled.div`
   display: flex;
   height: 100%;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-end;
-  grid-column: 3 / span 4;
+  margin-bottom: 45px;
 
-  @media screen and (max-width: 980px) {
+  /* @media screen and (max-width: 980px) {
     flex-direction: column;
     align-items: flex-start;
     grid-column: 1 / span 3;
@@ -222,95 +105,25 @@ const Greeting = styled.div`
     span:nth-child(2) {
       margin-left: 0 !important;
     }
-  }
-`;
-
-const blink = keyframes`
-  25% { opacity: 50%; }
-  50% { opacity: 0}; /* 100% X */
-`;
-
-const Inner = styled.span`
-  position: relative;
-  display: flex;
-  align-items: center;
-  color: #1dff8e;
-
-  &::after {
-    content: "";
-    display: inline-block;
-    width: 25px;
-    height: 80%;
-    background: ${({ theme }) => theme.color.appColor};
-    opacity: 0.8;
-    position: absolute;
-    top: 50%;
-    right: -36px;
-    transform: translateY(-50%);
-    animation: ${blink} 1.2s step-end infinite;
-  }
-`;
-
-const En = styled.span`
-  display: flex;
-
-  span {
-    display: none;
-  }
-`;
-
-const Ko = styled.span`
-  display: flex;
-  line-height: 2.2;
-  font-size: calc(1rem + 2.5vw);
-
-  span {
-    display: none;
-    width: fit-content;
-  }
+  } */
 `;
 
 const Name = styled.span`
   display: inline-block;
   position: relative;
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.fontColor};
 `;
 
-const Paragragh1 = styled.div`
-  height: 50%;
-  grid-column: 2 / span 3;
+const PopupTextBox = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 45px;
+`;
 
-  div {
-    height: 100%;
-    padding: 0 calc(10rem + 2.5vw);
-    background-color: ${({ theme }) => theme.color.appColor};
-    border-radius: 150px;
-    color: #222;
-    margin-left: 100px;
-    overflow: hidden;
-  }
-
-  p {
-    display: flex;
-    justify-content: center;
-  }
-
-  @media screen and (max-width: 980px) {
-    grid-column: 1 / span 2;
-    div {
-      margin-left: 0;
-      height: 80%;
-      padding: 0 calc(8rem + 2.5vw);
-    }
-  }
-
-  @media screen and (max-width: 425px) {
-    height: 60%;
-
-    div {
-      padding: 0 calc(5rem + 2.5vw);
-    }
-  }
+const Star = styled.span`
+  font-size: 12rem;
+  color: ${({ theme }) => theme.color.fontColor};
 `;
 
 const scroll = (movewidth: number) => keyframes`
@@ -320,17 +133,21 @@ const scroll = (movewidth: number) => keyframes`
   }
 `;
 
-const Paragragh2 = styled.div<{ movewidth: number }>`
+const MarqueeText = styled.div<{ movewidth: number }>`
+  width: 1000px;
   height: 100%;
-  grid-column: 4 / span 4;
-  border-radius: 25%;
+  background: #c148ec;
+  border-radius: 100px;
+  padding: 10px calc(1rem + 2vw);
   overflow: hidden;
   position: relative;
   display: flex;
+  margin-left: auto;
 
   p {
     margin-right: 50px;
-    background: linear-gradient(90deg, rgba(29, 255, 142, 1) 0%, rgba(255, 242, 68, 1) 56%, rgba(255, 255, 255, 1) 89%);
+    /* background: linear-gradient(90deg, rgba(29, 255, 142, 1) 0%, rgba(255, 242, 68, 1) 56%, rgba(255, 255, 255, 1) 89%); */
+    background: #222;
     background-size: 200% auto;
     color: transparent;
     -moz-background-clip: text;
