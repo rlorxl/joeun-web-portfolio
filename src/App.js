@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { gsap } from "gsap";
 import About from "./components/About.tsx";
 import Main from "./components/Main.tsx";
-import Navigation from "./components/Navigation.tsx";
+import Navigation from "./components/ui/Navigation.tsx";
 import Works from "./components/Works.tsx";
 import Article from "./components/Article.tsx";
 import Contact from "./components/Contact.tsx";

@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import CursorContext from "../../context/cursor.tsx";
 
 const PopupText = ({ text, duration = 0.2 }: { text: string | string[]; duration?: number }) => {
+  const { expandHandler } = useContext(CursorContext);
+
   const [displayedText, setDisplayedText] = useState<string[]>([]);
   const [endTime, setEndTime] = useState<number>(0);
   const [arrIndex, setArrIndex] = useState<number>(0);
@@ -41,16 +44,16 @@ const PopupText = ({ text, duration = 0.2 }: { text: string | string[]; duration
   }, [text, isStart]);
 
   return (
-    <Container>
+    <Container onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
       {isStart
         ? displayedText.map((char, i) => (
             <Text key={char + i} duration={i * duration}>
-              {char}
+              <span>{char}</span>
             </Text>
           ))
         : displayedText.map((char, i) => (
             <FadeoutText key={char + i} duration={i * duration}>
-              {char}
+              <span>{char}</span>
             </FadeoutText>
           ))}
     </Container>

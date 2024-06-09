@@ -1,22 +1,16 @@
 /* eslint-disable object-shorthand */
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useContext, useLayoutEffect, useRef, useState } from "react";
 import { styled, keyframes } from "styled-components";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TypingText from "./main/TypingText.tsx";
 import PopupText from "./main/PopupText.tsx";
+import CursorContext from "../context/cursor.tsx";
 
 const Main = () => {
+  const { expandHandler } = useContext(CursorContext);
   const [moveWidth, setMoveWidth] = useState<number>(0);
 
   const p2 = useRef<HTMLParagraphElement>(null);
-  // const t1 = useRef<GSAPTimeline>();
-  // const t2 = useRef<GSAPTimeline>();
-  // const t3 = useRef<GSAPTimeline>();
-  // t1.current = gsap.timeline({ paused: true, repeat: -1 });
-  // t2.current = gsap.timeline({ paused: true });
-  // t3.current = gsap.timeline({ paused: true, repeat: -1 });
 
   useLayoutEffect(() => {
     const setElementWidth = () => {
@@ -32,15 +26,17 @@ const Main = () => {
   return (
     <MainWrap>
       <InnerBox>
-        <Greeting>
+        <Greeting onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
           <TypingText text={["Hello", "안녕하세요", "こんにちは", "Bonjour", "Hola!"]} />
           <Name style={{ marginLeft: "60px" }}>I'm Joeun,</Name>
         </Greeting>
         <PopupTextBox>
           <PopupText text={["Sensible", "Flexible", "Steady"]} />
-          <Star>*</Star>
+          <Star onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
+            *
+          </Star>
         </PopupTextBox>
-        <MarqueeText movewidth={moveWidth + 50}>
+        <MarqueeText movewidth={moveWidth + 50} onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
           {Array(2)
             .fill("")
             .map(item => (
@@ -65,8 +61,7 @@ const MainWrap = styled.section`
   font-family: "Montserrat", sans-serif;
   font-size: calc(1.2rem + 6vw);
   font-weight: 600;
-  /* border-bottom: 2px solid #111; */
-  z-index: -1;
+  /* z-index: -1; */
 
   p {
     white-space: nowrap;
