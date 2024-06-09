@@ -45,7 +45,7 @@ export default App;
 
 const Logo = styled.h1`
   font-size: ${({ theme }) => theme.fontSize.medium1};
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.fontColor};
   text-transform: uppercase;
   position: absolute;
   top: 25px;

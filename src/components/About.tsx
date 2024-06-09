@@ -115,7 +115,7 @@ export default About;
 const AboutWrap = styled.section`
   margin: 0 auto;
   padding: 12rem 18rem;
-  background: #fbffe5;
+  background: ${({ theme }) => theme.color.backgroundColor};
   overflow-x: hidden;
   position: relatvie;
 

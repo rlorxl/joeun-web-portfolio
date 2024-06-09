@@ -20,7 +20,7 @@ const Contact = () => {
 
   const changeBgColor = () => {
     gsap.to([".contact", ".article"], {
-      background: "#CCF036",
+      background: "#F04545",
     });
     gsap.to([".contact", ".contact__heading", ".contact a"], {
       color: "#222",
@@ -35,7 +35,7 @@ const Contact = () => {
       color: "#f0f0f0",
     });
     gsap.to(".contact__heading", {
-      color: "#CCF036",
+      color: "#F04545",
     });
   };
 
@@ -105,10 +105,6 @@ const ContactWrap = styled.section`
   text-align: center;
   padding-top: 12rem;
   color: ${({ theme }) => theme.color.white};
-
-  h2 {
-    color: ${({ theme }) => theme.color.appColor};
-  }
 
   div > p {
     margin-top: 16px;

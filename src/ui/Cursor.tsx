@@ -14,12 +14,12 @@ export default Cursor;
 
 const SmallCursor = styled.div<{ enter: string; device: boolean }>`
   position: fixed;
-  width: 12px;
-  height: 12px;
-  background: #fff;
+  width: 9px;
+  height: 9px;
+  background: ${({ theme }) => theme.color.appColor};
   border-radius: 50%;
-  margin-left: -6px;
-  margin-top: -6px;
+  margin-left: -4.5px;
+  margin-top: -4.5px;
   z-index: 999;
   pointer-events: none;
 

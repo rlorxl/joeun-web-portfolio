@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
 :root {
   --global-width: 1280px;
   --max-width: 1440px;
+
 }
 
 *,
@@ -35,7 +36,7 @@ body {
   font-family: 'Poppins', sans-serif;
   width: 100vw;
   color: #111;
-  background: #111;
+  background: ${({ theme }) => theme.color.backgroundColor};
   position: relative;
   overflow-x: hidden;
 
@@ -48,7 +49,7 @@ body {
 
 section {
   position: relative;
-  background: #111;
+  background: ${({ theme }) => theme.color.backgroundColor};
 }
 
 div,
@@ -76,7 +77,7 @@ h1, h2 {
 }
 
 h2 {
-  color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.color.appColor};
   font-size: ${({ theme }) => theme.fontSize.large};
 }
 `;
@@ -87,9 +88,11 @@ const global = {
 };
 
 const color = {
-  appColor: "#CCF036",
-  fontColor: "#4C4C4C",
+  appColor: "#F04545",
+  fontColor: "#222",
   darkmodeColor: "#C5C5C5",
+  backgroundColor: "#f4f4f4",
+  darkmodeBackgroundColor: "#242424",
   white: "#f8f8f8",
   black: "#222",
   borderColor: "#A4A2A2",
