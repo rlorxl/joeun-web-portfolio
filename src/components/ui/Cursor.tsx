@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { css, styled } from "styled-components";
-import CursorContext from "../context/cursor.tsx";
+import CursorContext from "../../context/cursor.tsx";
 
 const Cursor = forwardRef(({ device }: { device: boolean }, ref) => {
   const ctx = useContext(CursorContext);

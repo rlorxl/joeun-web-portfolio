@@ -91,7 +91,7 @@ const color = {
   appColor: "#F04545",
   fontColor: "#222",
   darkmodeColor: "#C5C5C5",
-  backgroundColor: "#f4f4f4",
+  backgroundColor: "#f2f2f2",
   darkmodeBackgroundColor: "#242424",
   white: "#f8f8f8",
   black: "#222",

@@ -7,8 +7,8 @@ import Navigation from "./components/Navigation.tsx";
 import Works from "./components/Works.tsx";
 import Article from "./components/Article.tsx";
 import Contact from "./components/Contact.tsx";
-import Cursor from "./ui/Cursor.tsx";
-import CursorBehind from "./ui/CursorBehind.tsx";
+import Cursor from "./components/ui/Cursor.tsx";
+import CursorBehind from "./components/ui/CursorBehind.tsx";
 import useMouse from "./hooks/useMouse.tsx";
 
 function App() {
