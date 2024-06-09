@@ -56,6 +56,7 @@ const Text = styled.div`
   height: 100%;
   color: ${({ theme }) => theme.color.fontColor};
   overflow: hidden;
+  white-space: nowrap;
 `;
 
 const Cursor = styled.span`
