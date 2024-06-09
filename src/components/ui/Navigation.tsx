@@ -1,8 +1,10 @@
 import { gsap } from "gsap";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { css, keyframes, styled } from "styled-components";
+import CursorContext from "../../context/cursor.tsx";
 
 const Navigation = () => {
+  const { expandHandler } = useContext(CursorContext);
   const [menuClicked, setMenuClicked] = useState<boolean>(false);
 
   useEffect(() => {
@@ -19,13 +21,13 @@ const Navigation = () => {
   return (
     <NavigationWrap clicked={menuClicked.toString()}>
       <ul>
-        <li className="nav">
+        <li className="nav" onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
           <a href="#about">About</a>
         </li>
-        <li className="nav">
+        <li className="nav" onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
           <a href="#works">Works</a>
         </li>
-        <li className="nav">
+        <li className="nav" onMouseEnter={expandHandler} onMouseLeave={expandHandler}>
           <a href="#contact">Contact</a>
         </li>
       </ul>
