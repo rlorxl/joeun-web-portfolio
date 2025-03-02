@@ -85,6 +85,12 @@ const Works = () => {
       });
   }, []);
 
+  const checkLink = (link: string) => {
+    if (link === '/') {
+      alert('현재 서버문제로 점검중입니다.😭')
+    }
+  }
+
   return (
     <WorksWrap>
       <HeadingWrap>
@@ -105,7 +111,7 @@ const Works = () => {
         {Data.projects.map(({ id, name, date, src, stack, description, tags, link, portfolioLink, githubLink }, i) => (
           <li key={i} id={id} className={id}>
             <ImageBox imageid={id} onMouseEnter={() => mouseHandler(true)} onMouseLeave={() => mouseHandler(false)}>
-              <a href={link} target="_blank" rel="noreferrer">
+              <a href={link === '/' ? undefined :link} onClick={() => checkLink(link)} target="_blank" rel="noreferrer">
                 <div>
                   <img src={src.path} alt={src.alt} />
                 </div>

@@ -102,7 +102,7 @@ const projects: Projects[] = [
       "cookie를 활용한 다크모드를 구현하고, 페이지별 메타태그를 적용",
     ],
     tags: ["개인", "모바일", "블로그"],
-    link: "https://rlorxl.me",
+    link: "https://joeun-log-rlorxl.vercel.app/",
   },
   {
     id: "project2",
@@ -120,7 +120,7 @@ const projects: Projects[] = [
       "서버리스db를 활용하여 유저별 데이터를 관리",
     ],
     tags: ["FE 2인", "웹앱", "기획", "디자인", "개발"],
-    link: "https://panda-vert.vercel.app/",
+    link: "/",
     portfolioLink: "https://fire-climb-c7d.notion.site/Panda-6261ca29817949c2b93448910f6a4c90?pvs=25",
   },
   // {
@@ -188,14 +188,14 @@ const projects: Projects[] = [
 const articles: Article[] = [
   {
     id: "article1",
-    title: "mdx태그 스타일링, 조건부 렌더링",
+    title: "React query global 에러콜백과 Error Boundary로 컴포넌트 에러 핸들링",
     linkTo:
-      "https://rlorxl.me/blog/develop/2023/9/mdx%ED%83%9C%EA%B7%B8-%EC%8A%A4%ED%83%80%EC%9D%BC%EB%A7%81,-%EC%A1%B0%EA%B1%B4%EB%B6%80-%EB%A0%8C%EB%8D%94%EB%A7%81",
+      "https://velog.io/@rlorxl/Refactoring-Chapter5.-React-query-global-%EC%97%90%EB%9F%AC%EC%BD%9C%EB%B0%B1%EA%B3%BC-Error-Boundary%EB%A1%9C-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%97%90%EB%9F%AC-%ED%95%B8%EB%93%A4%EB%A7%81%EC%9D%84-%ED%95%98%EC%9E%90-fu42zesv",
   },
   {
     id: "article2",
     title: "Next.js 13 찍먹하기",
-    linkTo: "https://rlorxl.me/blog/develop/2023/9/Next.js-13-%EC%B0%8D%EB%A8%B9%ED%95%98%EA%B8%B0",
+    linkTo: "https://joeun-log-rlorxl.vercel.app/blog/develop/2023/9/Next.js-13-%EC%B0%8D%EB%A8%B9%ED%95%98%EA%B8%B0",
   },
   {
     id: "article3",
